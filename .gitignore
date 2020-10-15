@@ -373,3 +373,10 @@ hs_err_pid*
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,maven,node,androidstudio,angular
+MeTrail Server/mvnw
+MeTrail Server/mvnw.cmd
+MeTrail Server/.mvn/wrapper/maven-wrapper.jar
+MeTrail Server/.mvn/wrapper/maven-wrapper.properties
+MeTrail Server/.mvn/wrapper/MavenWrapperDownloader.java
+MeTrail Server/src/main/resources/application.properties
+MeTrail Server/.mvn/wrapper/maven-wrapper.jar
