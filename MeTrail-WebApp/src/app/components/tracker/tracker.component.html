@@ -1,0 +1,41 @@
+<div class="content">
+  <h2>Monitoring pracowników</h2>
+
+  <div class="forms">
+    <div>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Pracownik</mat-label>
+        <mat-select>
+          <mat-option> Jan Kowalski </mat-option>
+          <mat-option> Adam Nowak </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Data</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <agm-map [zoom]="13" [latitude]="lat" [longitude]="lng">
+    <agm-marker
+      *ngFor="let point of points"
+      [latitude]="point.latitude"
+      [longitude]="point.longitude"
+    >
+    </agm-marker>
+
+    <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'#07b57a'">
+      <agm-polyline-point
+        *ngFor="let point of points"
+        [latitude]="point.latitude"
+        [longitude]="point.longitude"
+      >
+      </agm-polyline-point>
+    </agm-polyline>
+  </agm-map>
+</div>
