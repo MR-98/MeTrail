@@ -1,36 +1,19 @@
 .forms {
   display: flex;
   flex-direction: row;
-}
-
-.forms > div {
-  margin-right: 20px;
+  justify-content: space-around;
 }
 
 agm-map {
-  height: 550px;
+  height: 500px;
 }
 
-@media screen and (max-width: 900px) {
-  .content {
-    margin-left: 0;
-  }
-
-  .forms {
-    justify-content: space-around;
-  }
-}
-
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 800px) {
   .forms {
     flex-direction: column;
   }
 
-  .forms > div {
-    margin-right: 0;
-  }
-
-  .form-field {
+  mat-form-field {
     width: 100%;
   }
 }

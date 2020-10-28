@@ -15,13 +15,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TrackerComponent } from './components/tracker/tracker.component';
 import { AgmCoreModule } from '@agm/core';
+import { TopbarComponent } from './components/topbar/topbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    TrackerComponent
+    TrackerComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule,
