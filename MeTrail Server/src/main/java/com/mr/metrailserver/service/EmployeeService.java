@@ -1,0 +1,36 @@
+package com.mr.metrailserver.service;
+
+
+import com.mr.metrailserver.model.Employee;
+import com.mr.metrailserver.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EmployeeService {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    public List<Employee> getAll() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee findById(Long employeeId) {
+        return employeeRepository.findById(employeeId).orElseThrow();
+    }
+
+    public Employee add(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public Employee editEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public void deleteEmployee(Long employeeId) {
+        employeeRepository.deleteById(employeeId);
+    }
+}
