@@ -1,0 +1,30 @@
+<div class="login-panel">
+  <mat-card>
+    <mat-card-title>
+      <img src="assets/logo/map-icon.png"/>
+      MyTrail
+    </mat-card-title>
+
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <span>Zaloguj się</span>
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="{{ placeholder.email }}"
+        name="email"
+        id="email"
+        class="input"
+      />
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="{{ placeholder.password }}"
+        name="password"
+        id="password"
+        class="input"
+      />
+      <button mat-raised-button class="sign-in-btn">Zaloguj</button>
+      <button mat-button class="sign-up-btn">Zarejestruj się</button>
+    </form>
+  </mat-card>
+</div>

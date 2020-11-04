@@ -16,6 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { TrackerComponent } from './components/tracker/tracker.component';
 import { AgmCoreModule } from '@agm/core';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,8 @@ import { TopbarComponent } from './components/topbar/topbar.component';
     HomeComponent,
     NavbarComponent,
     TrackerComponent,
-    TopbarComponent
+    TopbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +41,11 @@ import { TopbarComponent } from './components/topbar/topbar.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdmtjTZUQRICnZMPJJIkAr11dJrFQTSvM'
+      apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })
   ],
   providers: [],

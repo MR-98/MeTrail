@@ -1,4 +1,4 @@
-<div class="topbar">
+<div class="topbar" id="topbar" *ngIf="currentUser">
   <button class="sidebar-btn" (click)=onClick()>
     <i class="material-icons">view_headline</i>
   </button>
@@ -6,9 +6,9 @@
   MyTrail
 
   <div class="sign-out-panel">
-    <button class="sign-out-btn">
+    <button class="sign-out-btn" (click)=signOut()>
       <i class="material-icons">login</i>
-      Sign out
+      Wyloguj
     </button>
   </div>
 </div>

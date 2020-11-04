@@ -1,0 +1,54 @@
+.login-panel {
+  width: 400px;
+  margin: 0 auto;
+  padding: 100px 0 0 0;
+}
+
+mat-card {
+  background-color: #31bbe6;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+mat-card img {
+  width: 40px;
+  margin-right: -10px;
+  vertical-align: middle;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+.form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+input:focus {
+  outline: none;
+}
+
+.sign-in-btn {
+  width: 100%;
+  margin-top: 20px;
+  align-self: center;
+}
+
+.sign-up-btn {
+  width: 100%;
+  align-self: center;
+}
