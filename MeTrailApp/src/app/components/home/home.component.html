@@ -1,17 +1,22 @@
-<ion-content no-bounce>
+<ion-content no-bounce mode="md">
   <div class="flex-container">
     <div class="flex-child">
       <div>
-        Jan Kowalski
+        <div class="name">
+          {{employeeName}}
+        </div>
+        
 
         <div class="driving-factor">
-          Driving factor
+          {{drivingFactor}}
         </div>
-  
         <div class="info">
-          <p>Samochód: Fiat Ducato</p>
-          <p>Długość geograficzna: {{longitude}}</p>
-          <p>Szerokość geograficzna: {{latitude}}</p>
+          Samochód <br /> 
+          <i>Skoda Fabia</i> <br />
+          Długość geograficzna <br /> 
+          <i>{{longitude}}</i> <br />
+          Szerokość geograficzna <br /> 
+          <i>{{latitude}}</i>
         </div>
       </div>
     </div>
@@ -19,18 +24,18 @@
       Lokalizator
       <div class="grid">
         <div class="row">
-          <ion-button color="light" class="action-btn">
+          <ion-button class="action-btn">
             START
           </ion-button>
-          <ion-button color="light" class="action-btn">
+          <ion-button class="action-btn">
             STOP
           </ion-button>
         </div>
         <div class="row">
-          <ion-button color="light" class="action-btn">
+          <ion-button class="action-btn">
             PAUZA
           </ion-button>
-          <ion-button color="light" class="action-btn">
+          <ion-button class="action-btn">
             WYLOGUJ
           </ion-button>
         </div>
