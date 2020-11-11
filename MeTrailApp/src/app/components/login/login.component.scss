@@ -1,7 +1,34 @@
-.card-center {
-    height: 100%;
+ion-content {
+	--padding-top: 20%;
+	--background: linear-gradient(
+		0deg,
+		rgba(43, 90, 148, 1) 0%,
+		rgba(45, 112, 229, 1) 35%,
+		rgba(45, 112, 229, 1) 100%
+	);
+	--overflow: hidden;
+}
+
+ion-card {
+    color: black;
+	padding: 10px;
+}
+
+h3 {
+	margin-top: 5px;
+}
+
+.logo-container {
+	height: 20%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: red;
+    color: white;
+    font-size: 26px;
+    justify-content: center;
+    font-family: 'Pacifico', cursive;
+}
+
+.logo-container img {
+    width: 80px;
+    margin-left: -10%;
 }
