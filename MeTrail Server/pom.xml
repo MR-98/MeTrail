@@ -70,6 +70,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <configuration>
+                    <version>1</version>
+                    <projectId>mytrail-2k20</projectId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
