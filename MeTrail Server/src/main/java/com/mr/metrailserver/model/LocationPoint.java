@@ -16,6 +16,7 @@ public class LocationPoint {
     private double latitude;
     private Long employeeId;
     private LocalDateTime time;
+    private double speed;
 
     public LocationPoint() {
     }
@@ -58,5 +59,13 @@ public class LocationPoint {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }

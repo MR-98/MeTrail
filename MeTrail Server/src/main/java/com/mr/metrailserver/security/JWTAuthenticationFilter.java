@@ -70,7 +70,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         TokenBuilder tokenBuilder = new TokenBuilder();
         tokenBuilder.withTokenPrefix(TOKEN_PREFIX)
                 .withToken(token)
-                .withRole(user.getRole());
+                .withRole(user.getRole())
+                .withUserId(user.getId())
+                .withFullName(user.getFullName());
 
         res.getWriter().write(tokenBuilder.build());
     }

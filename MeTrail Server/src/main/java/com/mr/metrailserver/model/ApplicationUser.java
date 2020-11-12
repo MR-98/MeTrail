@@ -11,6 +11,7 @@ public class ApplicationUser {
     private long id;
     private String username;
     private String password;
+    private String fullName;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -41,5 +42,13 @@ public class ApplicationUser {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

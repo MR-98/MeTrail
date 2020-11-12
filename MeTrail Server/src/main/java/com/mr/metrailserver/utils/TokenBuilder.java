@@ -1,12 +1,12 @@
 package com.mr.metrailserver.utils;
 
-import com.mr.metrailserver.security.SecurityConstants;
-
 public class TokenBuilder {
 
+    private Long userId;
     private String tokenPrefix;
     private String token;
     private UserRole role;
+    private String fullName;
 
     public TokenBuilder() {
     }
@@ -29,10 +29,27 @@ public class TokenBuilder {
         return this;
     }
 
+    public TokenBuilder withUserId(long userId) {
+        this.userId = userId;
+
+        return this;
+    }
+
+    public TokenBuilder withFullName(String fullName) {
+        this.fullName = fullName;
+
+        return this;
+    }
+
     public String build() {
         return "{\"token\":\""
                 + this.tokenPrefix
                 + this.token
+                + "\","
+                + "\"userId\": \""
+                + this.userId
+                + "\","
+                + "\"fullName\": \""
                 + "\","
                 + "\"role\": \""
                 + this.role
