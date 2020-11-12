@@ -11,9 +11,9 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
-    private String firstName;
-    private String surname;
+    private String fullName;
     private double drivingEfficiencyFactor;
+    private String email;
 
     public Employee() {
     }
@@ -26,20 +26,12 @@ public class Employee {
         this.ID = ID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public double getDrivingEfficiencyFactor() {
@@ -48,5 +40,13 @@ public class Employee {
 
     public void setDrivingEfficiencyFactor(double drivingEfficiencyFactor) {
         this.drivingEfficiencyFactor = drivingEfficiencyFactor;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -50,6 +50,7 @@ public class TokenBuilder {
                 + this.userId
                 + "\","
                 + "\"fullName\": \""
+                + this.fullName
                 + "\","
                 + "\"role\": \""
                 + this.role
