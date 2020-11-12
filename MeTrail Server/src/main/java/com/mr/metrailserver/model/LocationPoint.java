@@ -1,10 +1,9 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class LocationPoint {
@@ -15,7 +14,8 @@ public class LocationPoint {
     private double longitude;
     private double latitude;
     private Long employeeId;
-    private LocalDateTime time;
+    private LocalDate date;
+    private LocalTime time;
     private double speed;
 
     public LocationPoint() {
@@ -53,11 +53,19 @@ public class LocationPoint {
         this.employeeId = employeeId;
     }
 
-    public LocalDateTime getTime() {
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
