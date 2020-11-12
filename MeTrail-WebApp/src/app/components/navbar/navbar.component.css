@@ -15,7 +15,7 @@
 .sidebar a {
   display: inline-block;
   width: 100%;
-  padding: 16px 20px;
+  padding: 16px 10px;
   color: #515253;
   text-decoration: none;
   flex-grow: 1;
@@ -46,7 +46,7 @@
 
 .navigation {
   font-size: 14px;
-  margin-left: 20px;
+  margin-left: 15px;
   color: gray
 }
 

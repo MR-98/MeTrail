@@ -1,0 +1,45 @@
+<div class="content" id="content">
+  <h2>Dodaj pracownika</h2>
+
+  <form class="add-form" [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+    <mat-label>Imię</mat-label>
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      class="input"
+      formControlName="firstName"
+    />
+    <mat-label>Nazwisko</mat-label>
+    <input
+      type="text"
+      name="lastName"
+      id="lastName"
+      class="input"
+      formControlName="lastName"
+    />
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      class="input"
+      formControlName="email"
+    />
+    <mat-label>Hasło</mat-label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      class="input"
+      formControlName="password"
+    />
+
+    <div class="buttons-container">
+      <button mat-raised-button class="save-btn" type="submit">Zapisz</button>
+      <button mat-raised-button class="cancel-btn" (click)="onCancel()">
+        Anuluj
+      </button>
+    </div>
+  </form>
+</div>
