@@ -35,4 +35,8 @@ public class LocationPointService {
     public void deleteById(Long locationPointId) {
         locationPointRepository.deleteById(locationPointId);
     }
+
+    public List<LocationPoint> getLocationPointsForEmployeeByDate(Long employeeId, String date) {
+        return locationPointRepository.findByEmployeeIdAndDate(employeeId, LocalDate.parse(date));
+    }
 }
