@@ -24,6 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EmployeeManagementComponent } from './components/employee-management/employee-management.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

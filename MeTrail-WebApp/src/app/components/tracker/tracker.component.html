@@ -5,24 +5,27 @@
     <div>
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Pracownik</mat-label>
-        <mat-select>
-          <mat-option> Jan Kowalski </mat-option>
-          <mat-option> Adam Nowak </mat-option>
+        <mat-select (selectionChange)="onEmployeeChange($event.value)">
+          <mat-option *ngFor="let employee of employees" [value]="employee"> {{employee.fullName}} </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Data</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event.value)"/>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
 
-  <agm-map [zoom]="13" [latitude]="lat" [longitude]="lng">
+  <agm-map [zoom]="13" [latitude]="initialLatitude" [longitude]="initialLongitude" *ngIf="!loaded">
+  </agm-map>
+
+  <agm-map [zoom]="13" [latitude]="points[0].latitude" [longitude]="points[0].longitude" *ngIf="loaded">
     <agm-marker
+
       *ngFor="let point of points"
       [latitude]="point.latitude"
       [longitude]="point.longitude"

@@ -1,5 +1,5 @@
 export class Employee {
-  ID: number;
+  id: number;
   fullName: string;
   drivingEfficiencyFactor: number;
   email: string;

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Employee } from 'src/app/models/Employee';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-management',
@@ -8,9 +13,22 @@ import { Router } from '@angular/router';
 })
 export class EmployeeManagementComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  displayedColumns: string[] = ['id', 'fullName', 'email', 'drivingEfficiencyFactor'];
+  employees: Employee[] = [];
+  datasource;
+
+  constructor(private router: Router, private employeeService: EmployeeService) { }
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    this.employeeService.getAllEmployees().subscribe(employees => {
+      this.employees = employees;
+      this.datasource = new MatTableDataSource(this.employees);
+      this.datasource.paginator = this.paginator;
+      this.datasource.sort = this.sort;
+    })
   }
 
   onAddEmployee() {
