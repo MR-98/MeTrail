@@ -19,7 +19,6 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   getLocationPointsForEmployeeByDate(employeeId: number, date: string): Observable<LocationPoint[]> {
-    console.log(employeeId);
     return this.http.get<LocationPoint[]>(this.url + "/forEmployeeByDate?employeeId=" + employeeId + "&date=" + date);
   }
 }

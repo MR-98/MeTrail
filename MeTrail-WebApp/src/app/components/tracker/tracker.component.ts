@@ -32,7 +32,6 @@ export class TrackerComponent implements OnInit {
 
   onEmployeeChange(employee: Employee) {
     this.chosenEmployee = employee;
-    console.log(this.chosenEmployee);
 
     if(this.chosenDate) {
       this.updateMap();
@@ -51,9 +50,12 @@ export class TrackerComponent implements OnInit {
   }
 
   updateMap() {
+    this.loaded = false;
     this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployee.id, this.chosenDate).subscribe(points => {
-      this.points = points;
-      this.loaded = true;
+      if(points.length > 0) {
+        this.points = points;
+        this.loaded = true;
+      }
     })
   }
 
