@@ -27,6 +27,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
+import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MatSortModule } from '@angular/material/sort';
     TopbarComponent,
     LoginComponent,
     EmployeeManagementComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    VehicleManagementComponent,
+    AddVehicleComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,44 @@
+<div class="content" id="content">
+  <h2>Dodaj pojazd</h2>
+  <form class="add-form" [formGroup]="addVehicleForm" (ngSubmit)="onSubmit()">
+    <mat-label>Marka</mat-label>
+    <input
+      type="text"
+      name="make"
+      id="make"
+      class="input"
+      formControlName="make"
+    />
+    <mat-label>Model</mat-label>
+    <input
+      type="text"
+      name="model"
+      id="model"
+      class="input"
+      formControlName="model"
+    />
+    <mat-label>Rok produkcji</mat-label>
+    <input
+      type="number"
+      name="yearOfManufacture"
+      id="yearOfManufacture"
+      class="input"
+      formControlName="yearOfManufacture"
+    />
+    <mat-label>Numer rejestracyjny</mat-label>
+    <input
+      type="text"
+      name="licencePlate"
+      id="licencePlate"
+      class="input"
+      formControlName="licencePlate"
+    />
+
+    <div class="buttons-container">
+      <button mat-raised-button class="save-btn" type="submit">Zapisz</button>
+      <button mat-raised-button class="cancel-btn" (click)="onCancel()">
+        Anuluj
+      </button>
+    </div>
+  </form>
+</div>

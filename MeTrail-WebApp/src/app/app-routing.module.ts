@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
 import { EmployeeManagementComponent } from './components/employee-management/employee-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { TrackerComponent } from './components/tracker/tracker.component';
+import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { AuthGuard } from './helpers/AuthGuard';
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'employeeManagement', component: EmployeeManagementComponent, canActivate: [AuthGuard]},
   {path: 'addEmployee', component: AddEmployeeComponent, canActivate: [AuthGuard]},
+  {path: 'vehicleManagement', component: VehicleManagementComponent, canActivate: [AuthGuard]},
+  {path: 'addVehicle', component: AddVehicleComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 
