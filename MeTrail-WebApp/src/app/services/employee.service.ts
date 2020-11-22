@@ -42,6 +42,29 @@ export class EmployeeService {
   }
 
   getEmployeeById(employeeId: number): Observable<Employee> {
-    return this.http.get<Employee>(this.url+"?employeeId="+employeeId);
+    return this.http.get<Employee>(this.url+"?employeeId="+employeeId, httpOptions);
+  }
+
+  editEmployee(employeeId: number, firstName: string, lastName: string, email: string, drivingEfficiencyFactor: number): Observable<Employee> {
+    return this.http.put<Employee>(this.url, {
+      id: employeeId,
+      fullName: firstName + " " + lastName,
+      email: email,
+      drivingEfficiencyFactor: drivingEfficiencyFactor
+    }, httpOptions);
+  }
+
+  editEmployeeAccount(employeeId: number, username: string, firstName: string, lastName: string): Observable<any> {
+    return this.http.put<Employee> (this.url.replace('employees', 'editUser'), {
+      id: employeeId,
+      username: username,
+      fullName: firstName + ' ' + lastName,
+      role: UserRole.EMPLOYEE
+    }, httpOptions);
+
+  }
+
+  deleteEmployeeById(employeeId: number): Observable<any> {
+    return this.http.delete<any>(this.url+'?employeeId='+employeeId, httpOptions);
   }
 }

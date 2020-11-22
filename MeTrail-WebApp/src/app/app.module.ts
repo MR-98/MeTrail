@@ -29,6 +29,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,10 @@ import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.compon
     EmployeeManagementComponent,
     AddEmployeeComponent,
     VehicleManagementComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    ConfirmDialogComponent,
+    EditEmployeeComponent,
+    EditVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,7 @@ import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.compon
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

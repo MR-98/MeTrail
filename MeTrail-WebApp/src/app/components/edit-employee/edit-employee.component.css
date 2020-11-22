@@ -1,0 +1,37 @@
+.add-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.input {
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.save-btn {
+  background-color: #31bbe6;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  margin-left: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .add-form {
+    width: 100%;
+  }
+}

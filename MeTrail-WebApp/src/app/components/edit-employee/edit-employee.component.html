@@ -1,0 +1,37 @@
+<div class="content" id="content">
+  <h2>Edytuj dane pracownika</h2>
+  <form class="add-form" [formGroup]="editEmployeeForm" (ngSubmit)="onSubmit()">
+    <mat-label>Imię</mat-label>
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      class="input"
+      formControlName="firstName"
+    />
+    <mat-label>Nazwisko</mat-label>
+    <input
+      type="text"
+      name="lastName"
+      id="lastName"
+      class="input"
+      formControlName="lastName"
+    />
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      class="input"
+      formControlName="email"
+    />
+
+    <div class="buttons-container">
+      <button mat-raised-button class="save-btn" type="submit">Zapisz</button>
+      <button mat-raised-button class="cancel-btn" (click)="onCancel()">
+        Anuluj
+      </button>
+    </div>
+  </form>
+</div>
+

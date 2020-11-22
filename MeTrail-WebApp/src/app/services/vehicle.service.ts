@@ -29,6 +29,26 @@ export class VehicleService {
   }
 
   getAllVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(this.url+"/getAll");
+    return this.http.get<Vehicle[]>(this.url+"/getAll", httpOptions);
+  }
+
+  getVehicleById(vehicleId: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(this.url+"?vehicleId="+vehicleId, httpOptions);
+  }
+
+  deleteVehicle(vehicleId: number): Observable<any> {
+    return this.http.delete<any>(this.url+"?vehicleId="+vehicleId, httpOptions);
+  }
+
+  editVehicle(ID: number, make: string, vehicleModel: string, yearOfManufacture: number, licencePlate: string, currentVehicleUser: string): Observable<Vehicle> {
+    console.log(ID);
+    return this.http.put<Vehicle>(this.url, {
+      id: ID,
+      make: make,
+      vehicleModel: vehicleModel,
+      yearOfManufacture: yearOfManufacture,
+      licencePlate: licencePlate,
+      currentVehicleUser: currentVehicleUser
+    }, httpOptions);
   }
 }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 import { EmployeeManagementComponent } from './components/employee-management/employee-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'addEmployee', component: AddEmployeeComponent, canActivate: [AuthGuard]},
   {path: 'vehicleManagement', component: VehicleManagementComponent, canActivate: [AuthGuard]},
   {path: 'addVehicle', component: AddVehicleComponent, canActivate: [AuthGuard]},
+  {path: 'editVehicle/:vehicleId', component: EditVehicleComponent},
+  {path: 'editEmployee/:employeeId', component: EditEmployeeComponent},
   {path: 'login', component: LoginComponent}
 ];
 
