@@ -14,12 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mr.metrailserver.security.SecurityConstants.*;
+import static com.mr.metrailserver.security.SecurityConstants.HEADER_STRING;
+import static com.mr.metrailserver.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    private String secret;
+
+    public JWTAuthorizationFilter(AuthenticationManager authManager, String secret) {
         super(authManager);
+        this.secret = secret;
     }
 
     @Override
@@ -43,7 +47,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+            String user = JWT.require(Algorithm.HMAC512(this.secret.getBytes()))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();

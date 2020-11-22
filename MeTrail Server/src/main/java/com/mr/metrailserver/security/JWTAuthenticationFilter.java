@@ -22,15 +22,16 @@ import java.util.Date;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.mr.metrailserver.security.SecurityConstants.*;
 
-
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private ApplicationUserRepository userRepository;
     private AuthenticationManager authenticationManager;
+    private String secret;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ApplicationUserRepository userRepository) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ApplicationUserRepository userRepository, String secret) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.secret = secret;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(HMAC512(SECRET.getBytes()));
+                .sign(HMAC512(this.secret.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");

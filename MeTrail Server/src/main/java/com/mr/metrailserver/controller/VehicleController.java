@@ -34,7 +34,7 @@ public class VehicleController {
         this.vehicleService.deleteVehicleByVehicleId(vehicleId);
     }
 
-    @GetMapping("/setCurrentUser")
+    @PostMapping("/setCurrentUser")
     public Vehicle setCurrentUser(@RequestParam(value = "vehicleId") Long vehicleId, @RequestParam(value = "currentUser") String currentUser) {
         return this.vehicleService.setCurrentUser(vehicleId, currentUser);
     }
