@@ -26,9 +26,8 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>('http://localhost:8080/login', { username, password })
+    return this.http.post<any>('https://mytrail-2k20.ew.r.appspot.com/login', { username, password })
       .pipe(map(user => {
-        console.log(user);
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -41,7 +40,9 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    this.storage.remove('currentUser')
+    this.storage.remove('currentUser');
+    this.storage.remove('email');
+    this.storage.remove('password');
     this.currentUserSubject.next(null);
   }
 }

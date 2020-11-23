@@ -1,0 +1,26 @@
+ion-list p {
+    margin-left: 10px;
+}
+
+.vehicle-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vehicle-header ion-button {
+    width: 30px;
+    height: 30px;
+    --padding-bottom: 0;
+    --padding-end: 0;
+    --padding-start: 0;
+    --padding-top: 0;
+    margin-right: 10px;
+}
+
+.save-btn {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

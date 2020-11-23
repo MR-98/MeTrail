@@ -46,6 +46,7 @@ ion-content {
     width: 100%;
     height: 100%;
     padding: 0;
+    flex-grow: 1;
     margin: 0 2px 0 2px;
     --background: rgb(66, 127, 232);
 }

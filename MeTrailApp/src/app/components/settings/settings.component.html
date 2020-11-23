@@ -1,0 +1,23 @@
+<ion-content no-bounce mode="md">
+  <ion-list>
+    <ion-list-header>
+      <h3>Ustawienia</h3>
+    </ion-list-header>
+    <div class="vehicle-header">
+      <p>Używany pojazd</p>
+      <ion-button class="scan-btn" color="secondary">
+        <img src="../../../assets/scan-icon.png">
+      </ion-button>
+    </div>
+    
+    <ion-item>
+      <ion-select [(ngModel)]="selected" slot="end">
+        <ion-select-option *ngFor="let vehicle of vehicles" [value]="vehicle">
+          {{vehicle.licencePlate}} {{vehicle.make}} {{vehicle.vehicleModel}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+  </ion-list>
+  <ion-button color="secondary" class="save-btn" (click)="onSave()">Zapisz</ion-button>
+</ion-content>

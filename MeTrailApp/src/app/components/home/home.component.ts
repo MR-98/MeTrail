@@ -8,6 +8,9 @@ import {
   BackgroundGeolocationEvents
 } from "@ionic-native/background-geolocation/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationTrackerService } from 'src/app/services/location-tracker.service';
+import { Storage } from '@ionic/storage';
+import { Vehicle } from 'src/app/models/Vehicle';
 
 @Component({
   selector: 'app-home',
@@ -16,34 +19,51 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class HomeComponent implements OnInit {
 
-  latitude: any = 0; //latitude
-  longitude: any = 0; //longitude
+  latitude: any = '---'; //latitude
+  longitude: any = '---'; //longitude
   interval: any;
   speed: number;
   drivingFactor: number = 0;
-  employeeName: string = 'Jan Kowalski';
+  employeeName: string = '';
+  currentVehicle;
 
   constructor(
     private backgroundGeolocation: BackgroundGeolocation,
     private geolocation: Geolocation,
     private authService: AuthenticationService,
-    private router: Router) { }
+    private router: Router,
+    private locationTracker: LocationTrackerService,
+    private storage: Storage
+    ) { }
 
   ngOnInit() {
-   }
+    this.employeeName = this.authService.currentUserValue.fullName;
+    this.currentVehicle = 'test';
+  }
+
+  ionViewDidEnter() {
+    this.storage.get('currentVehicle').then(val => {
+      if(val != null) {
+        let vehicle: Vehicle = JSON.parse(val);
+        this.currentVehicle = vehicle.licencePlate + ' ' + vehicle.make + ' ' + vehicle.vehicleModel;
+      } else {
+        this.currentVehicle = '-----';
+      }
+    })
+  } 
 
   onSignOut() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { skipLocationChange: true });
   }
 
   onTrackerStart() {
     const config: BackgroundGeolocationConfig = {
       desiredAccuracy: 0,
       stationaryRadius: 20,
-      distanceFilter: 10, 
+      distanceFilter: 10,
       debug: false,
-      interval: 2000,
+      interval: 20000,
       stopOnTerminate: false // enable this to clear background location settings when the app terminates
     };
 
@@ -64,17 +84,10 @@ export class HomeComponent implements OnInit {
     this.backgroundGeolocation.start();
 
 
+    this.getCurrentLocationForeground;
     this.interval = setInterval(() => {
-      this.geolocation.getCurrentPosition().then((resp) => {
-        this.latitude = resp.coords.latitude;
-        this.longitude = resp.coords.longitude;
-        this.speed = resp.coords.speed;
-
-        this.sendGPS;
-       }).catch((error) => {
-         console.log('Error getting location', error);
-       });
-    },3000)
+      this.getCurrentLocationForeground();
+    }, 20000)
   }
 
   onTrackerStop() {
@@ -87,10 +100,26 @@ export class HomeComponent implements OnInit {
       this.speed = 0;
     }
     let timestamp = new Date();
-
-    console.log(this.latitude);
-    console.log(this.longitude);
-    console.log(this.speed);
     // HTTP POST HERE
+
+    this.locationTracker.sendGPS(this.latitude, this.longitude, this.speed).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  getCurrentLocationForeground() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      this.speed = resp.coords.speed;
+
+      this.sendGPS();
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+  onSettingsClick() {
+    this.router.navigate(['/settings']);
   }
 }

@@ -1,8 +1,12 @@
 <ion-content no-bounce mode="md">
 	<div class="logo-container">
-    <img src="assets/logo/map-icon.png">
-    MyTrail
-  </div>
+		<img src="assets/logo/map-icon.png" />
+		MyTrail
+	</div>
+
+	<div class="spinner" *ngIf="loading">
+		<ion-spinner color="secondary"></ion-spinner>
+	</div>
 	<ion-card>
 		<h3>Zaloguj się</h3>
 
@@ -19,6 +23,14 @@
 				placeholder="Hasło"
 				type="password"
 			></ion-input>
+
+			<div class="remember-container">
+				<ion-checkbox
+					formControlName="rememberCheckbox"
+					color="secondary"
+				></ion-checkbox>
+				<ion-label>Zapamiętaj mnie</ion-label>
+			</div>
 
 			<ion-button
 				color="secondary"

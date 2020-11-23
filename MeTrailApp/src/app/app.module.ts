@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -18,21 +18,29 @@ import { HomeComponent } from './components/home/home.component';
 import { LocationTrackerService } from './services/location-tracker.service'
 import { LoginComponent } from './components/login/login.component';
 import { IonicStorageModule } from '@ionic/storage';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './utils/JwtInterceptor';
+import { ErrorInterceptor } from './utils/ErrorInterceptor';
+import { CommonModule } from "@angular/common";
+import { SettingsComponent } from './components/settings/settings.component';
+import { VehicleService } from './services/vehicle.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent],
+    LoginComponent,
+    SettingsComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+    BrowserModule,
+    CommonModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    AppRoutingModule, 
+    AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -41,8 +49,11 @@ import { HttpClientModule } from '@angular/common/http';
     LocationTrackerService,
     BackgroundGeolocation,
     LocationAccuracy,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    VehicleService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
