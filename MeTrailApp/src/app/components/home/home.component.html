@@ -23,10 +23,10 @@
 			Lokalizator
 			<div class="grid">
 				<div class="row">
-					<ion-button class="action-btn" (click)="onTrackerStart()">
+					<ion-button class="action-btn" (click)="onTrackerStart()" [disabled]="trackingOn">
 						<img src="../../../assets/tracker-icons/start.png">
 					</ion-button>
-					<ion-button class="action-btn"(click)="onTrackerStop()">
+					<ion-button class="action-btn"(click)="onTrackerStop()" [disabled]="!trackingOn">
 						<img src="../../../assets/tracker-icons/stop.png">
 					</ion-button>
 				</div>
@@ -40,5 +40,6 @@
 				</div>
 			</div>
 		</div>
+		<ion-progress-bar type="indeterminate" color="success" *ngIf="showProgressBar"></ion-progress-bar>
 	</div>
 </ion-content>

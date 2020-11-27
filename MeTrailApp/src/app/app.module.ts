@@ -10,10 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { BackgroundGeolocation } from "@ionic-native/background-geolocation/ngx";
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { HomeComponent } from './components/home/home.component';
 import { LocationTrackerService } from './services/location-tracker.service'
 import { LoginComponent } from './components/login/login.component';
@@ -24,6 +21,9 @@ import { ErrorInterceptor } from './utils/ErrorInterceptor';
 import { CommonModule } from "@angular/common";
 import { SettingsComponent } from './components/settings/settings.component';
 import { VehicleService } from './services/vehicle.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx/';
 
 @NgModule({
   declarations: [
@@ -44,12 +44,12 @@ import { VehicleService } from './services/vehicle.service';
   providers: [
     StatusBar,
     SplashScreen,
-    AndroidPermissions,
-    Geolocation,
     LocationTrackerService,
+    AndroidPermissions,
     BackgroundGeolocation,
-    LocationAccuracy,
     VehicleService,
+    BarcodeScanner,
+    HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
