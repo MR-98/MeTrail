@@ -33,7 +33,7 @@ export class TrackerComponent implements OnInit {
   onEmployeeChange(employee: Employee) {
     this.chosenEmployee = employee;
 
-    if(this.chosenDate) {
+    if (this.chosenDate) {
       this.updateMap();
     }
   }
@@ -44,7 +44,7 @@ export class TrackerComponent implements OnInit {
     let year: number = date.getFullYear();
     this.chosenDate = year + "-" + month + "-" + day;
 
-    if(this.chosenEmployee) {
+    if (this.chosenEmployee) {
       this.updateMap();
     }
   }
@@ -54,7 +54,7 @@ export class TrackerComponent implements OnInit {
     this.loaded = false;
     this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployee.id, this.chosenDate).subscribe(points => {
       console.log('test2');
-      if(points.length > 0) {
+      if (points.length > 0) {
         this.points = points;
         this.loaded = true;
         console.log(points);
@@ -62,13 +62,21 @@ export class TrackerComponent implements OnInit {
     })
   }
 
-  getIconUrl(index: number){
+  getIconUrl(index: number) {
     console.log(index);
-    if(index == 0 || index == this.points.length-1) {
+    if (index == 0 || index == this.points.length - 1) {
       return '../../../assets/pins/pinGreen.png';
     } else {
       return '../../../assets/pins/pinRed.png';
     }
+  }
+
+  onMouseOver(infoWindow) {
+    infoWindow.open();
+  }
+
+  onMouseOut(infoWindow) {
+    infoWindow.close();
   }
 
 }
