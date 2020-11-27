@@ -50,13 +50,25 @@ export class TrackerComponent implements OnInit {
   }
 
   updateMap() {
+    console.log('test');
     this.loaded = false;
     this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployee.id, this.chosenDate).subscribe(points => {
+      console.log('test2');
       if(points.length > 0) {
         this.points = points;
         this.loaded = true;
+        console.log(points);
       }
     })
+  }
+
+  getIconUrl(index: number){
+    console.log(index);
+    if(index == 0 || index == this.points.length-1) {
+      return '../../../assets/pins/pinGreen.png';
+    } else {
+      return '../../../assets/pins/pinRed.png';
+    }
   }
 
 }

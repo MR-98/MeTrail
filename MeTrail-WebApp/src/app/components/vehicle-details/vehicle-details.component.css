@@ -1,0 +1,35 @@
+.flex-parent-box {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-grid-list {
+  flex-grow: 1;
+}
+
+mat-grid-tile {
+  text-align: left;
+  padding: 0;
+}
+
+.qr-container {
+  flex-grow: 1;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) {
+  .flex-parent-box {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  mat-grid-list {
+    margin: 0 auto;
+    width: 100%;
+  }
+}

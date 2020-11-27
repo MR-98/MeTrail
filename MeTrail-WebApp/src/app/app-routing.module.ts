@@ -8,6 +8,7 @@ import { EmployeeManagementComponent } from './components/employee-management/em
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { TrackerComponent } from './components/tracker/tracker.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { AuthGuard } from './helpers/AuthGuard';
 
@@ -19,8 +20,9 @@ const routes: Routes = [
   {path: 'addEmployee', component: AddEmployeeComponent, canActivate: [AuthGuard]},
   {path: 'vehicleManagement', component: VehicleManagementComponent, canActivate: [AuthGuard]},
   {path: 'addVehicle', component: AddVehicleComponent, canActivate: [AuthGuard]},
-  {path: 'editVehicle/:vehicleId', component: EditVehicleComponent},
-  {path: 'editEmployee/:employeeId', component: EditEmployeeComponent},
+  {path: 'editVehicle/:vehicleId', component: EditVehicleComponent, canActivate: [AuthGuard]},
+  {path: 'editEmployee/:employeeId', component: EditEmployeeComponent, canActivate: [AuthGuard]},
+  {path: 'vehicleDetails/:vehicleId', component: VehicleDetailsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 

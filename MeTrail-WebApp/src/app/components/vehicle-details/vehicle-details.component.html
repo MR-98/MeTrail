@@ -1,0 +1,24 @@
+<div class="content">
+  <h2>Szczegóły pojazdu</h2>
+  <div class="flex-parent-box">
+    <mat-grid-list cols="2" rowHeight="50px">
+      <mat-grid-tile class="title">Marka:</mat-grid-tile>
+      <mat-grid-tile>{{ vehicle?.make }}</mat-grid-tile>
+      <mat-grid-tile class="title">Model:</mat-grid-tile>
+      <mat-grid-tile>{{ vehicle?.vehicleModel }}</mat-grid-tile>
+      <mat-grid-tile class="title">Rok produkcji:</mat-grid-tile>
+      <mat-grid-tile>{{ vehicle?.yearOfManufacture }}</mat-grid-tile>
+      <mat-grid-tile class="title">Numer rejestracyjny:</mat-grid-tile>
+      <mat-grid-tile>{{ vehicle?.licencePlate }}</mat-grid-tile>
+    </mat-grid-list>
+    <div class="qr-container">
+      <mat-label>Kod QR pojazdu</mat-label>
+      <ngx-qrcode
+        *ngIf="value"
+        [elementType]="elementType"
+        [errorCorrectionLevel]="correctionLevel"
+        [value]="value"
+      ></ngx-qrcode>
+    </div>
+  </div>
+</div>

@@ -26,9 +26,10 @@
   <agm-map [zoom]="13" [latitude]="points[0].latitude" [longitude]="points[0].longitude" *ngIf="loaded">
     <agm-marker
 
-      *ngFor="let point of points"
+      *ngFor="let point of points; index as i"
       [latitude]="point.latitude"
       [longitude]="point.longitude"
+      [iconUrl]="getIconUrl(i)"
     >
     </agm-marker>
 

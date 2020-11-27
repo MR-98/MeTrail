@@ -33,6 +33,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
     AddVehicleComponent,
     ConfirmDialogComponent,
     EditEmployeeComponent,
-    EditVehicleComponent
+    EditVehicleComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,8 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
+    MatGridListModule,
+    NgxQRCodeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })
