@@ -43,7 +43,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
+                            creds.getEmail(),
                             creds.getPassword(),
                             new ArrayList<>())
             );
@@ -66,7 +66,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");
 
-        ApplicationUser user = this.userRepository.findByUsername(((User) auth.getPrincipal()).getUsername());
+        ApplicationUser user = this.userRepository.findByEmail(((User) auth.getPrincipal()).getUsername());
 
         TokenBuilder tokenBuilder = new TokenBuilder();
         tokenBuilder.withTokenPrefix(TOKEN_PREFIX)
