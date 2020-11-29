@@ -14,6 +14,7 @@ public class Employee {
     private String fullName;
     private double drivingEfficiencyFactor;
     private String email;
+    private Long applicationUserId;
 
     public Employee() {
     }
@@ -48,5 +49,13 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getApplicationUserId() {
+        return applicationUserId;
+    }
+
+    public void setApplicationUserId(Long applicationUserId) {
+        this.applicationUserId = applicationUserId;
     }
 }
