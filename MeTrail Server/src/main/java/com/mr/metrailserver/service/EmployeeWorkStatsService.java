@@ -9,7 +9,8 @@ import com.mr.metrailserver.utils.CoordinatesDistanceCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +24,21 @@ public class EmployeeWorkStatsService {
     @Autowired
     private LocationPointRepository locationPointRepository;
 
-    public EmployeeWorkStats startWorking(Long employeeId, LocalDateTime timestamp) {
+    public EmployeeWorkStats startWorking(Long employeeId, String date, String time) {
         EmployeeWorkStats stats = new EmployeeWorkStats();
-        stats.setStartWorkTime(timestamp);
+        stats.setDate(LocalDate.parse(date));
+        stats.setStartWorkTime(LocalTime.parse(time));
         stats.setEmployeeId(employeeId);
         this.workStatsRepository.save(stats);
 
         return stats;
     }
 
-    public EmployeeWorkStats stopWorking(Long workStatsId, LocalDateTime timestamp) {
+    public EmployeeWorkStats stopWorking(Long workStatsId, String time) {
         EmployeeWorkStats stats = this.workStatsRepository.findById(workStatsId).orElseThrow();
         CoordinatesDistanceCalculator calculator = new CoordinatesDistanceCalculator();
 
-        stats.setEndWorkTime(timestamp);
+        stats.setEndWorkTime(LocalTime.parse(time));
         stats.setWorkTimeInHours(getTotalWorkTimeInHours(stats));
         stats.setTraveledDistance(calculator.calculateTotalDistanceInKilometers(getEmployeePoints(stats)));
         this.workStatsRepository.save(stats);
@@ -49,11 +51,15 @@ public class EmployeeWorkStatsService {
     }
 
     private List<Point> getEmployeePoints(EmployeeWorkStats stats) {
-        List<LocationPoint> employeePoints = this.locationPointRepository.findByEmployeeIdAndDate(stats.getEmployeeId(), stats.getStartWorkTime().toLocalDate());
+        List<LocationPoint> employeePoints = this.locationPointRepository.findByEmployeeIdAndDate(stats.getEmployeeId(), stats.getDate());
         List<Point> points = new ArrayList<>();
         employeePoints.forEach(p -> {
             points.add(new Point(p.getLatitude(), p.getLongitude()));
         });
         return points;
+    }
+
+    public EmployeeWorkStats getStatsForEmployeeAndDate(Long employeeId, String date) {
+        return this.workStatsRepository.findByEmployeeIdAndDate(employeeId, LocalDate.parse(date));
     }
 }

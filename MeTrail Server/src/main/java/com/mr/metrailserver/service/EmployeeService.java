@@ -23,6 +23,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Employee add(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
     public Employee findById(Long employeeId) {
         return employeeRepository.findById(employeeId).orElseThrow();
     }

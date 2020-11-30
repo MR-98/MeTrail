@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class EmployeeWorkStats {
@@ -12,13 +13,15 @@ public class EmployeeWorkStats {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    private LocalDateTime startWorkTime;
-    private LocalDateTime endWorkTime;
+    private LocalDate date;
+    private LocalTime startWorkTime;
+    private LocalTime endWorkTime;
     private double workTimeInHours;
     private double traveledDistance;
     private Long employeeId;
 
-    public EmployeeWorkStats(LocalDateTime startWorkTime, LocalDateTime endWorkTime, double workTimeInHours, double traveledDistance, Long employeeId) {
+    public EmployeeWorkStats(LocalDate date, LocalTime startWorkTime, LocalTime endWorkTime, double workTimeInHours, double traveledDistance, Long employeeId) {
+        this.date = date;
         this.startWorkTime = startWorkTime;
         this.endWorkTime = endWorkTime;
         this.workTimeInHours = workTimeInHours;
@@ -37,19 +40,27 @@ public class EmployeeWorkStats {
         Id = id;
     }
 
-    public LocalDateTime getStartWorkTime() {
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getStartWorkTime() {
         return startWorkTime;
     }
 
-    public void setStartWorkTime(LocalDateTime startWorkTime) {
+    public void setStartWorkTime(LocalTime startWorkTime) {
         this.startWorkTime = startWorkTime;
     }
 
-    public LocalDateTime getEndWorkTime() {
+    public LocalTime getEndWorkTime() {
         return endWorkTime;
     }
 
-    public void setEndWorkTime(LocalDateTime endWorkTime) {
+    public void setEndWorkTime(LocalTime endWorkTime) {
         this.endWorkTime = endWorkTime;
     }
 

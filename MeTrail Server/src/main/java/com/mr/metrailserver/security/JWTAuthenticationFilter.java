@@ -4,7 +4,9 @@ import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mr.metrailserver.model.ApplicationUser;
 import com.mr.metrailserver.repository.ApplicationUserRepository;
+import com.mr.metrailserver.repository.EmployeeRepository;
 import com.mr.metrailserver.utils.TokenBuilder;
+import com.mr.metrailserver.utils.UserRole;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,15 +25,16 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.mr.metrailserver.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
     private ApplicationUserRepository userRepository;
+    private EmployeeRepository employeeRepository;
     private AuthenticationManager authenticationManager;
     private String secret;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, ApplicationUserRepository userRepository, String secret) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, String secret, ApplicationUserRepository userRepository, EmployeeRepository employeeRepository) {
         this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
         this.secret = secret;
+        this.userRepository = userRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -68,11 +71,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         ApplicationUser user = this.userRepository.findByEmail(((User) auth.getPrincipal()).getUsername());
 
+        long id = user.getRole() == UserRole.EMPLOYEE ?
+                this.employeeRepository.findByEmail(user.getEmail()).getID() :
+                user.getId();
+
         TokenBuilder tokenBuilder = new TokenBuilder();
         tokenBuilder.withTokenPrefix(TOKEN_PREFIX)
                 .withToken(token)
                 .withRole(user.getRole())
-                .withUserId(user.getId())
+                .withUserId(id)
                 .withFullName(user.getFullName());
 
         res.getWriter().write(tokenBuilder.build());

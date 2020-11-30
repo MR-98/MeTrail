@@ -1,6 +1,7 @@
 package com.mr.metrailserver.security;
 
 import com.mr.metrailserver.repository.ApplicationUserRepository;
+import com.mr.metrailserver.repository.EmployeeRepository;
 import com.mr.metrailserver.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -15,16 +16,22 @@ import static com.mr.metrailserver.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    private ApplicationUserRepository userRepository;
+    private EmployeeRepository employeeRepository;
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private ApplicationUserRepository userRepository;
     private String secret;
 
-    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, ApplicationUserRepository userRepository, @Value("${jwt.secret}") String secret) {
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService,
+                                 BCryptPasswordEncoder bCryptPasswordEncoder,
+                                 ApplicationUserRepository userRepository,
+                                 EmployeeRepository employeeRepository,
+                                 @Value("${jwt.secret}") String secret) {
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userRepository = userRepository;
         this.secret = secret;
+        this.userRepository = userRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -33,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(), this.userRepository, this.secret))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), this.secret, this.userRepository, this.employeeRepository))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), this.secret))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
