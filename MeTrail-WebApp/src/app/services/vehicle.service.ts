@@ -18,13 +18,19 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  addVehicle(make: string, vehicleModel: string, yearOfManufacture: number, licencePlate: string, currentVehicleUser: string): Observable<Vehicle> {
+  addVehicle(make: string,
+    vehicleModel: string,
+    yearOfManufacture: number,
+    licencePlate: string,
+    estimatedMileage: number,
+    currentVehicleUser: string): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.url, {
       make: make,
       vehicleModel: vehicleModel,
       yearOfManufacture: yearOfManufacture,
       licencePlate: licencePlate,
-      currentVehicleUser: currentVehicleUser
+      currentVehicleUser: currentVehicleUser,
+      estimatedMileage: estimatedMileage,
     }, httpOptions);
   }
 
@@ -40,14 +46,20 @@ export class VehicleService {
     return this.http.delete<any>(this.url+"?vehicleId="+vehicleId, httpOptions);
   }
 
-  editVehicle(ID: number, make: string, vehicleModel: string, yearOfManufacture: number, licencePlate: string, currentVehicleUser: string): Observable<Vehicle> {
-    console.log(ID);
+  editVehicle(ID: number,
+    make: string,
+    vehicleModel: string,
+    yearOfManufacture: number,
+    licencePlate: string,
+    estimatedMileage: number,
+    currentVehicleUser: string): Observable<Vehicle> {
     return this.http.put<Vehicle>(this.url, {
       id: ID,
       make: make,
       vehicleModel: vehicleModel,
       yearOfManufacture: yearOfManufacture,
       licencePlate: licencePlate,
+      estimatedMileage: estimatedMileage,
       currentVehicleUser: currentVehicleUser
     }, httpOptions);
   }

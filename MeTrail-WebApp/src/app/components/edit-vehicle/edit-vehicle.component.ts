@@ -27,16 +27,19 @@ export class EditVehicleComponent implements OnInit {
       make: ['', Validators.required],
       vehicleModel: ['', Validators.required],
       yearOfManufacture: ['', Validators.required],
-      licencePlate: ['', Validators.required]
+      licencePlate: ['', Validators.required],
+      estimatedMileage: ['', Validators.required]
     });
 
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(val => {
       this.vehicle = val;
+      console.log(val);
       this.editVehicleForm.setValue({
         make: this.vehicle.make,
         vehicleModel: this.vehicle.vehicleModel,
         yearOfManufacture: this.vehicle.yearOfManufacture,
-        licencePlate: this.vehicle.licencePlate
+        licencePlate: this.vehicle.licencePlate,
+        estimatedMileage: this.vehicle.estimatedMileage,
       });
 
       console.log(this.editVehicleForm);
@@ -46,7 +49,12 @@ export class EditVehicleComponent implements OnInit {
   get f() { return this.editVehicleForm.controls; }
 
   onSubmit() {
-    this.vehicleService.editVehicle(this.vehicleId, this.f.make.value, this.f.vehicleModel.value, this.f.yearOfManufacture.value, this.f.licencePlate.value, null).subscribe(vehicle => {
+    this.vehicleService.editVehicle(this.vehicleId,
+      this.f.make.value, this.f.vehicleModel.value,
+      this.f.yearOfManufacture.value,
+      this.f.licencePlate.value,
+      this.f.estimatedMileage.value,
+      null).subscribe(vehicle => {
       console.log(vehicle);
     });
   }

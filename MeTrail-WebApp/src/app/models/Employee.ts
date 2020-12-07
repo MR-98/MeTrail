@@ -4,4 +4,5 @@ export class Employee {
   drivingEfficiencyFactor: number;
   email: string;
   applicationUserId: number;
+  totalTraveledDistanceInKilometers: number;
 }

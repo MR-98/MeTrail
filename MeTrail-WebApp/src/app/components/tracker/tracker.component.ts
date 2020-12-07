@@ -42,9 +42,9 @@ export class TrackerComponent implements OnInit {
   }
 
   onDateChange(date) {
-    let day: number = date.getDate();
-    let month: number = date.getMonth() + 1;
-    let year: number = date.getFullYear();
+    let year: string = date.getFullYear().toString().padStart(4, "0");
+    let month: string = (date.getMonth()+1).toString().padStart(2, "0");
+    let day: string = date.getDate().toString().padStart(2, "0");
     this.chosenDate = year + "-" + month + "-" + day;
 
     if (this.chosenEmployee) {

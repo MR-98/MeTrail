@@ -15,7 +15,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class VehicleManagementComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'make', 'vehicleModel', 'yearOfManufacture', 'licencePlate', 'currentUser', 'actions'];
+  displayedColumns: string[] = ['id', 'make', 'vehicleModel', 'yearOfManufacture', 'licencePlate', 'estimatedMileage', 'currentUser', 'actions'];
   vehicles: Vehicle[] = [];
   datasource;
 
@@ -27,6 +27,7 @@ export class VehicleManagementComponent implements OnInit {
   ngOnInit(): void {
     this.vehicleService.getAllVehicles().subscribe(vehicles => {
       this.vehicles = vehicles;
+      console.log(vehicles);
       this.initTable();
     })
   }

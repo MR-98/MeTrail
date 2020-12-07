@@ -15,7 +15,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class EmployeeManagementComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'fullName', 'email', 'drivingEfficiencyFactor', 'actions'];
+  displayedColumns: string[] = ['id', 'fullName', 'email', 'drivingEfficiencyFactor', 'totalTraveledDistanceInKilometers', 'actions'];
   employees: Employee[] = [];
   datasource;
 

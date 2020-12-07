@@ -37,12 +37,19 @@ export class EmployeeService {
     return this.http.get<Employee>(this.url+"?employeeId="+employeeId, httpOptions);
   }
 
-  editEmployee(employeeId: number, firstName: string, lastName: string, email: string, drivingEfficiencyFactor: number, applicationUserId: number): Observable<Employee> {
+  editEmployee(employeeId: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    drivingEfficiencyFactor: number,
+    totalTraveledDistanceInKilometers: number,
+    applicationUserId: number): Observable<Employee> {
     return this.http.put<Employee>(this.url, {
       id: employeeId,
       fullName: firstName + " " + lastName,
       email: email,
       drivingEfficiencyFactor: drivingEfficiencyFactor,
+      totalTraveledDistanceInKilometers: totalTraveledDistanceInKilometers,
       applicationUserId: applicationUserId
     }, httpOptions);
   }

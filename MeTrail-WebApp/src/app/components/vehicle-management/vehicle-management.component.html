@@ -37,11 +37,16 @@
         <td mat-cell *matCellDef="let vehicle">{{ vehicle.licencePlate }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="estimatedMileage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estymowany przebieg [km]</th>
+        <td mat-cell *matCellDef="let vehicle">{{ vehicle.estimatedMileage }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="currentUser">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Obecny użytkownik
         </th>
-        <td mat-cell *matCellDef="let vehicle">{{ vehicle.currentUser == undefined ? "-----" : vehicle.currentUser }}</td>
+        <td mat-cell *matCellDef="let vehicle">{{ vehicle.currentVehicleUser == undefined ? "-----" : vehicle.currentVehicleUser }}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">

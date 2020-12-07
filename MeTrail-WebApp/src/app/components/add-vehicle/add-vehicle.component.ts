@@ -19,14 +19,21 @@ export class AddVehicleComponent implements OnInit {
       make: ['', Validators.required],
       model: ['', Validators.required],
       yearOfManufacture: ['', Validators.required],
-      licencePlate: ['', Validators.required]
+      licencePlate: ['', Validators.required],
+      estimatedMileage: ['', Validators.required]
     });
   }
 
   get f() { return this.addVehicleForm.controls; }
 
   onSubmit() {
-    this.vehicleService.addVehicle(this.f.make.value, this.f.model.value, this.f.yearOfManufacture.value, this.f.licencePlate.value, null).subscribe(vehicle => {
+    this.vehicleService.addVehicle(
+      this.f.make.value,
+      this.f.model.value, this.f.yearOfManufacture.value,
+      this.f.licencePlate.value,
+      this.f.estimatedMileage.value,
+      null)
+      .subscribe(vehicle => {
       console.log(vehicle);
     })
   }
