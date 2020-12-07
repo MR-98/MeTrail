@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   speed: number;
   drivingFactor: number = 0;
   employeeName: string = '';
-  currentVehicle;
+  currentVehicle: Vehicle = undefined;
   showProgressBar: boolean = false;
   trackingOn: boolean = false;
 
@@ -40,8 +40,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentVehicle = 'test';
-
     this.employeeService.getEmployeeById(this.authService.currentUserValue.userId).subscribe(data => {
       this.drivingFactor = data.drivingEfficiencyFactor;
       this.employeeName = data.fullName;
@@ -54,9 +52,7 @@ export class HomeComponent implements OnInit {
     this.storage.get('currentVehicle').then(val => {
       if (val != null) {
         let vehicle: Vehicle = JSON.parse(val);
-        this.currentVehicle = vehicle.licencePlate + ' ' + vehicle.make + ' ' + vehicle.vehicleModel;
-      } else {
-        this.currentVehicle = '-----';
+        this.currentVehicle = vehicle;
       }
     })
   }
@@ -80,7 +76,7 @@ export class HomeComponent implements OnInit {
 
   onTrackerStart() {
 
-    this.workStatsService.startWork(this.authService.currentUserValue.userId).subscribe(data => {
+    this.workStatsService.startWork(this.authService.currentUserValue.userId, this.currentVehicle.id).subscribe(data => {
       console.log(data);
       this.storage.set('workStats', JSON.stringify(data));
     })

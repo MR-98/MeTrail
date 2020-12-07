@@ -18,7 +18,7 @@ export class WorkStatsService {
 
   constructor(private http: HttpClient){ }
 
-  startWork(employeeId: number) : Observable<EmployeeWorkStats> {
+  startWork(employeeId: number, vehicleId: number) : Observable<EmployeeWorkStats> {
     let t = new Date();
 
     let year: string = t.getFullYear().toString().padStart(4, "0");
@@ -32,7 +32,7 @@ export class WorkStatsService {
     let date: string = year+'-'+month+'-'+day;
     let time: string = hour+':'+minute+':'+second;
 
-    return this.http.post<EmployeeWorkStats>(this.url+'/startWorking?'+'employeeId='+employeeId+'&date='+date+'&time='+time, {}, httpOptions);
+    return this.http.post<EmployeeWorkStats>(this.url+'/startWorking?'+'employeeId='+employeeId+'&vehicleId='+vehicleId+'&date='+date+'&time='+time, {}, httpOptions);
   }
 
   stopWork(workStatsId: number) : Observable<EmployeeWorkStats> {

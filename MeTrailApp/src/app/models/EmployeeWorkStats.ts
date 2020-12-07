@@ -5,4 +5,5 @@ export class EmployeeWorkStats {
     workTimeInHours: number;
     traveledDistance: number;
     employeeId: number;
+    userVehicleId: number;
   }

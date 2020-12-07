@@ -11,7 +11,9 @@
 				</div>
 				<div class="info">
 					Pojazd <br />
-					<i>{{ currentVehicle }}</i> <br />
+					<i *ngIf="!currentVehicle">Vehicle not selected</i>
+					<i *ngIf="currentVehicle">{{currentVehicle?.licencePlate}} {{ currentVehicle?.make }} {{ currentVehicle?.vehicleModel }}</i>
+					<br />
 					Długość geograficzna <br />
 					<i>{{ longitude }}</i> <br />
 					Szerokość geograficzna <br />
@@ -23,23 +25,35 @@
 			Lokalizator
 			<div class="grid">
 				<div class="row">
-					<ion-button class="action-btn" (click)="onTrackerStart()" [disabled]="trackingOn">
-						<img src="../../../assets/tracker-icons/start.png">
+					<ion-button
+						class="action-btn"
+						(click)="onTrackerStart()"
+						[disabled]="trackingOn || !currentVehicle"
+					>
+						<img src="../../../assets/tracker-icons/start.png" />
 					</ion-button>
-					<ion-button class="action-btn"(click)="onTrackerStop()" [disabled]="!trackingOn">
-						<img src="../../../assets/tracker-icons/stop.png">
+					<ion-button
+						class="action-btn"
+						(click)="onTrackerStop()"
+						[disabled]="!trackingOn"
+					>
+						<img src="../../../assets/tracker-icons/stop.png" />
 					</ion-button>
 				</div>
 				<div class="row">
 					<ion-button class="action-btn" (click)="onSettingsClick()">
-						<img src="../../../assets/tracker-icons/settings.png">
+						<img src="../../../assets/tracker-icons/settings.png" />
 					</ion-button>
 					<ion-button class="action-btn" (click)="onSignOut()">
-						<img src="../../../assets/tracker-icons/signOut.png">
+						<img src="../../../assets/tracker-icons/signOut.png" />
 					</ion-button>
 				</div>
 			</div>
 		</div>
-		<ion-progress-bar type="indeterminate" color="success" *ngIf="showProgressBar"></ion-progress-bar>
+		<ion-progress-bar
+			type="indeterminate"
+			color="success"
+			*ngIf="showProgressBar"
+		></ion-progress-bar>
 	</div>
 </ion-content>

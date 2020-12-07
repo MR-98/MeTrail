@@ -6,4 +6,5 @@ export class Vehicle {
     yearOfManufacture: number;
     licencePlate: string;
     currentUser: string;
+    estimatedMileage: number;
 }  
