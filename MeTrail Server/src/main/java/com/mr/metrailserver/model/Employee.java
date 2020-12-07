@@ -15,6 +15,7 @@ public class Employee {
     private double drivingEfficiencyFactor;
     private String email;
     private Long applicationUserId;
+    private double totalTraveledDistanceInKilometers;
 
     public Employee() {
     }
@@ -57,5 +58,13 @@ public class Employee {
 
     public void setApplicationUserId(Long applicationUserId) {
         this.applicationUserId = applicationUserId;
+    }
+
+    public double getTotalTraveledDistanceInKilometers() {
+        return totalTraveledDistanceInKilometers;
+    }
+
+    public void setTotalTraveledDistanceInKilometers(double totalTraveledDistanceInKilometers) {
+        this.totalTraveledDistanceInKilometers = totalTraveledDistanceInKilometers;
     }
 }

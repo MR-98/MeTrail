@@ -1,6 +1,9 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Vehicle {
@@ -14,6 +17,7 @@ public class Vehicle {
     private int yearOfManufacture;
     private String licencePlate;
     private String currentVehicleUser;
+    private double estimatedMileage;
 
     public Vehicle() {
     }
@@ -64,5 +68,13 @@ public class Vehicle {
 
     public void setCurrentVehicleUser(String currentVehicleUser) {
         this.currentVehicleUser = currentVehicleUser;
+    }
+
+    public double getEstimatedMileage() {
+        return estimatedMileage;
+    }
+
+    public void setEstimatedMileage(double estimatedMileage) {
+        this.estimatedMileage = estimatedMileage;
     }
 }

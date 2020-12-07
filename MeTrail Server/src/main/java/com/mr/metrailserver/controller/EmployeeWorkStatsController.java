@@ -13,8 +13,10 @@ public class EmployeeWorkStatsController {
     private EmployeeWorkStatsService workStatsService;
 
     @PostMapping("/startWorking")
-    public EmployeeWorkStats startWorking(@RequestParam(value = "employeeId") Long employeeId,@RequestParam(value = "date") String date, @RequestParam(value = "time") String time) {
-        return this.workStatsService.startWorking(employeeId, date, time);
+    public EmployeeWorkStats startWorking(@RequestParam(value = "employeeId") Long employeeId,
+                                          @RequestParam(value = "vehicleId") Long vehicleId,
+                                          @RequestParam(value = "date") String date, @RequestParam(value = "time") String time) {
+        return this.workStatsService.startWorking(employeeId, vehicleId, date, time);
     }
 
     @PostMapping("/stopWorking")

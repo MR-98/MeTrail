@@ -20,8 +20,9 @@ public class EmployeeWorkStats {
     private double traveledDistance;
     private Long employeeId;
     private boolean analyzed;
+    private Long usedVehicleId;
 
-    public EmployeeWorkStats(LocalDate date, LocalTime startWorkTime, LocalTime endWorkTime, double workTimeInHours, double traveledDistance, Long employeeId, boolean analyzed) {
+    public EmployeeWorkStats(LocalDate date, LocalTime startWorkTime, LocalTime endWorkTime, double workTimeInHours, double traveledDistance, Long employeeId, boolean analyzed, Long usedVehicleId) {
         this.date = date;
         this.startWorkTime = startWorkTime;
         this.endWorkTime = endWorkTime;
@@ -29,6 +30,7 @@ public class EmployeeWorkStats {
         this.traveledDistance = traveledDistance;
         this.employeeId = employeeId;
         this.analyzed = analyzed;
+        this.usedVehicleId = usedVehicleId;
     }
 
     public EmployeeWorkStats() {
@@ -96,5 +98,13 @@ public class EmployeeWorkStats {
 
     public void setAnalyzed(boolean analyzed) {
         this.analyzed = analyzed;
+    }
+
+    public Long getUsedVehicleId() {
+        return usedVehicleId;
+    }
+
+    public void setUsedVehicleId(Long usedVehicleId) {
+        this.usedVehicleId = usedVehicleId;
     }
 }
