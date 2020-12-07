@@ -4,9 +4,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service'
 import { LocationTrackerService } from 'src/app/services/location-tracker.service';
 import { Storage } from '@ionic/storage';
 import { Vehicle } from 'src/app/models/Vehicle';
-import { ToastController } from '@ionic/angular';
 import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { WorkStatsService } from 'src/app/services/work-stats.service';
+import { EmployeeWorkStats } from 'src/app/models/EmployeeWorkStats';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-home',
@@ -30,15 +32,20 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private locationTracker: LocationTrackerService,
     private storage: Storage,
-    public toastController: ToastController,
     private backgroundGeolocation: BackgroundGeolocation,
     private androidPermissions: AndroidPermissions,
-    private zone: NgZone
+    private zone: NgZone,
+    private workStatsService: WorkStatsService,
+    private employeeService: EmployeeService,
   ) { }
 
   ngOnInit() {
-    this.employeeName = this.authService.currentUserValue.fullName;
     this.currentVehicle = 'test';
+
+    this.employeeService.getEmployeeById(this.authService.currentUserValue.userId).subscribe(data => {
+      this.drivingFactor = data.drivingEfficiencyFactor;
+      this.employeeName = data.fullName;
+    })
 
     this.checkPermissions();
   }
@@ -72,6 +79,12 @@ export class HomeComponent implements OnInit {
   }
 
   onTrackerStart() {
+
+    this.workStatsService.startWork(this.authService.currentUserValue.userId).subscribe(data => {
+      console.log(data);
+      this.storage.set('workStats', JSON.stringify(data));
+    })
+
     this.showProgressBar = true;
     this.trackingOn = true;
     const config: BackgroundGeolocationConfig = {
@@ -113,6 +126,17 @@ export class HomeComponent implements OnInit {
     this.latitude = '---';
     this.longitude = '---';
     this.trackingOn = false;
+    this.showProgressBar = false;
+
+    this.storage.get('workStats').then(val => {
+      let stats: EmployeeWorkStats = JSON.parse(val);
+      console.log(stats);
+      this.workStatsService.stopWork(stats.id).subscribe(data => {
+        console.log(data);
+      })
+    })
+
+    this.workStatsService.stopWork
   }
 
   sendGPS() {
@@ -121,13 +145,5 @@ export class HomeComponent implements OnInit {
     }
 
     this.locationTracker.sendGPS(this.latitude, this.longitude, this.speed)
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: this.longitude + ' ' + this.latitude,
-      duration: 1000
-    });
-    toast.present();
   }
 }

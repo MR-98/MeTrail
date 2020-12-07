@@ -25,8 +25,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>('https://mytrail-2k20.ew.r.appspot.com/login', { username, password })
+  login(email: string, password: string) {
+    return this.http.post<any>('https://mytrail-2k20.ew.r.appspot.com/login', { email, password })
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {

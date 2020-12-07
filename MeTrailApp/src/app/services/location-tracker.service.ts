@@ -23,13 +23,15 @@ export class LocationTrackerService {
     let minute: string = t.getMinutes().toString().padStart(2, "0");
     let second: string = t.getSeconds().toString().padStart(2, "0");
 
+    let speedInKmPerHour = speed * 3.6;
+
     const currentUser = this.authService.currentUserValue;
     this.http.setDataSerializer('json');
     this.http.post(
       this.url, {
         latitude: latitude,
         longitude: longitude,
-        speed: speed,
+        speed: speedInKmPerHour,
         employeeId: employeeId,
         time: hour + ":" + minute + ":" + second,
         date: year + "-" + month + "-" + day,
