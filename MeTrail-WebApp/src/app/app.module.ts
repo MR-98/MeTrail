@@ -36,6 +36,7 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     MatDialogModule,
     MatGridListModule,
     NgxQRCodeModule,
+    MatExpansionModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

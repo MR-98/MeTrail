@@ -26,44 +26,69 @@
     </div>
   </div>
 
-  <agm-map
-    [zoom]="13"
-    [latitude]="initialLatitude"
-    [longitude]="initialLongitude"
-    *ngIf="!loaded"
-  >
-  </agm-map>
-
-  <agm-map
-    [zoom]="13"
-    [latitude]="points[0].latitude"
-    [longitude]="points[0].longitude"
-    *ngIf="loaded"
-  >
-    <agm-marker
-      *ngFor="let point of points; index as i"
-      [latitude]="point.latitude"
-      [longitude]="point.longitude"
-      [iconUrl]="getIconUrl(i)"
-      (mouseOver)="onMouseOver(infoWindow)"
-      (mouseOut)="onMouseOut(infoWindow)"
+  <div class="tracker-container">
+    <agm-map
+      [zoom]="13"
+      [latitude]="initialLatitude"
+      [longitude]="initialLongitude"
+      *ngIf="!loaded"
     >
-      <agm-info-window [disableAutoPan]="false" #infoWindow>
-        <p>Data: {{point.date}}</p>
-        <p>Czas: {{point.time}}</p>
-        <p>Dł. geograficzna: {{point.longitude}}</p>
-        <p>Szer. geograficzna: {{point.latitude}}</p>
-        <p>Prędkość: {{point.speed}}</p>
-      </agm-info-window>
-    </agm-marker>
+    </agm-map>
 
-    <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'#07b57a'">
-      <agm-polyline-point
-        *ngFor="let point of points"
+    <agm-map
+      [zoom]="13"
+      [latitude]="points[0].latitude"
+      [longitude]="points[0].longitude"
+      *ngIf="loaded"
+    >
+      <agm-marker
+        *ngFor="let point of points; index as i"
         [latitude]="point.latitude"
         [longitude]="point.longitude"
+        [iconUrl]="getIconUrl(i)"
+        (mouseOver)="onMouseOver(infoWindow)"
+        (mouseOut)="onMouseOut(infoWindow)"
       >
-      </agm-polyline-point>
-    </agm-polyline>
-  </agm-map>
+        <agm-info-window [disableAutoPan]="false" #infoWindow>
+          <p>Data: {{ point.date }}</p>
+          <p>Czas: {{ point.time }}</p>
+          <p>Dł. geograficzna: {{ point.longitude }}</p>
+          <p>Szer. geograficzna: {{ point.latitude }}</p>
+          <p>Prędkość: {{ point.speed }}</p>
+        </agm-info-window>
+      </agm-marker>
+
+      <agm-polyline
+        [visible]="true"
+        [strokeWeight]="3"
+        [strokeColor]="'#07b57a'"
+      >
+        <agm-polyline-point
+          *ngFor="let point of points"
+          [latitude]="point.latitude"
+          [longitude]="point.longitude"
+        >
+        </agm-polyline-point>
+      </agm-polyline>
+    </agm-map>
+
+    <div class="tracker-info">
+      <mat-expansion-panel *ngIf="loaded">
+        <mat-expansion-panel-header>
+          <h3>Statystyki</h3>
+        </mat-expansion-panel-header>
+        <p><b>Pracownik:</b> {{ chosenEmployee?.fullName }}</p>
+        <p><b>Email pracownika:</b> {{ chosenEmployee?.email }}</p>
+        <p><b>Data:</b> {{ chosenDate }}</p>
+        <p>
+          <b>Współczynnik efektywności jazdy:</b>
+          {{ chosenEmployee?.drivingEfficiencyFactor }}
+        </p>
+        <p><b>Przebyty dystans:</b> {{employeeStats?.traveledDistance}} km</p>
+        <p><b>Czas rozpoczęcia pracy:</b> {{employeeStats?.startWorkTime}} </p>
+        <p><b>Czas zakończenia pracy:</b> {{employeeStats?.endWorkTime}} </p>
+        <p><b>Czas pracy:</b> {{employeeStats?.workTimeInHours}} h</p>
+      </mat-expansion-panel>
+    </div>
+  </div>
 </div>

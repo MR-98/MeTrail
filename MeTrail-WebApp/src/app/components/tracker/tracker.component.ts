@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/models/Employee';
+import { EmployeeWorkStats } from 'src/app/models/EmployeeWorkStats';
 import { LocationPoint } from 'src/app/models/LocationPoint';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { LocationService } from 'src/app/services/location.service';
+import { WorkStatsService } from 'src/app/services/work-stats.service';
 
 @Component({
   selector: 'app-tracker',
@@ -16,11 +18,12 @@ export class TrackerComponent implements OnInit {
   loaded: boolean = false;
   initialLatitude: number = 51.75000;
   initialLongitude: number = 19.46667;
+  employeeStats: EmployeeWorkStats;
 
   chosenDate: string;
   chosenEmployee: Employee;
 
-  constructor(private employeeService: EmployeeService, private locationService: LocationService) {
+  constructor(private employeeService: EmployeeService, private locationService: LocationService, private employeeStatsService: WorkStatsService) {
     this.employeeService.getAllEmployees().subscribe(data => {
       this.employees = data;
     });
@@ -50,24 +53,29 @@ export class TrackerComponent implements OnInit {
   }
 
   updateMap() {
-    console.log('test');
     this.loaded = false;
     this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployee.id, this.chosenDate).subscribe(points => {
-      console.log('test2');
       if (points.length > 0) {
         this.points = points;
         this.loaded = true;
-        console.log(points);
+        this.updateStats();
       }
     })
   }
 
+  updateStats() {
+    this.employeeStatsService.getStatsForEmployee(this.chosenEmployee.id, this.chosenDate).subscribe(data => {
+      this.employeeStats = data;
+    })
+  }
+
   getIconUrl(index: number) {
-    console.log(index);
-    if (index == 0 || index == this.points.length - 1) {
+    if (index == 0) {
       return '../../../assets/pins/pinGreen.png';
-    } else {
+    } else if(index == this.points.length - 1) {
       return '../../../assets/pins/pinRed.png';
+    } else {
+      return '../../../assets/pins/pinBlue.png';
     }
   }
 

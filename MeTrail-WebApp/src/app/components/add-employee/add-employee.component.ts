@@ -26,10 +26,8 @@ export class AddEmployeeComponent implements OnInit {
   get f() { return this.addEmployeeForm.controls; }
 
   onSubmit() {
-    this.employeeService.addEmployee(this.f.firstName.value, this.f.lastName.value, this.f.email.value).subscribe(employee => {
-      this.employeeService.createAccountForEmployee(employee, this.f.password.value).subscribe(()=> {
-        console.log('DONE');
-      });
+    this.employeeService.createAccountForEmployee(this.f.email.value, this.f.firstName.value + ' ' + this.f.lastName.value, this.f.password.value).subscribe(employee => {
+      console.log('DONE');
     })
   }
 

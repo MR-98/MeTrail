@@ -3,4 +3,5 @@ export class Employee {
   fullName: string;
   drivingEfficiencyFactor: number;
   email: string;
+  applicationUserId: number;
 }

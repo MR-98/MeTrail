@@ -43,7 +43,7 @@ export class EditEmployeeComponent implements OnInit {
   get f() { return this.editEmployeeForm.controls; }
 
   onSubmit() {
-    this.employeeService.editEmployee(this.employee.id, this.f.firstName.value, this.f.lastName.value, this.f.email.value, this.employee.drivingEfficiencyFactor).subscribe(val => {
+    this.employeeService.editEmployee(this.employee.id, this.f.firstName.value, this.f.lastName.value, this.f.email.value, this.employee.drivingEfficiencyFactor, this.employee.applicationUserId).subscribe(val => {
       console.log(val);
     })
   }
