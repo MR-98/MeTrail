@@ -6,6 +6,7 @@ import com.mr.metrailserver.model.Point;
 import com.mr.metrailserver.repository.EmployeeWorkStatsRepository;
 import com.mr.metrailserver.repository.LocationPointRepository;
 import com.mr.metrailserver.utils.CoordinatesDistanceCalculator;
+import com.mr.metrailserver.utils.DailyWorkStatsAnalyzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,15 @@ public class EmployeeWorkStatsService {
     @Autowired
     private LocationPointRepository locationPointRepository;
 
+    @Autowired
+    private DailyWorkStatsAnalyzer analyzer;
+
     public EmployeeWorkStats startWorking(Long employeeId, String date, String time) {
         EmployeeWorkStats stats = new EmployeeWorkStats();
         stats.setDate(LocalDate.parse(date));
         stats.setStartWorkTime(LocalTime.parse(time));
         stats.setEmployeeId(employeeId);
+        stats.setAnalyzed(false);
         this.workStatsRepository.save(stats);
 
         return stats;
@@ -61,5 +66,9 @@ public class EmployeeWorkStatsService {
 
     public EmployeeWorkStats getStatsForEmployeeAndDate(Long employeeId, String date) {
         return this.workStatsRepository.findByEmployeeIdAndDate(employeeId, LocalDate.parse(date));
+    }
+
+    public void startWorkStatsEngine() {
+        analyzer.analyzeWorkStats();
     }
 }

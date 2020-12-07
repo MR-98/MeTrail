@@ -1,0 +1,4 @@
+cron:
+  - description: "daily employee stats runner"
+    url: /employees/runEmployeeStatisticsEngine
+    schedule: every day 23:00 #GMT

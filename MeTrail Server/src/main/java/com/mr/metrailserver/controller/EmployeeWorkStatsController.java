@@ -26,4 +26,9 @@ public class EmployeeWorkStatsController {
     public EmployeeWorkStats getStatsForEmployeeIdAndDate(@RequestParam(value = "employeeId") Long employeeId, @RequestParam(value = "date") String date) {
         return this.workStatsService.getStatsForEmployeeAndDate(employeeId, date);
     }
+
+    @PostMapping("/runEmployeeStatisticsEngine")
+    public void startWorkStatsEngine() {
+        this.workStatsService.startWorkStatsEngine();
+    }
 }

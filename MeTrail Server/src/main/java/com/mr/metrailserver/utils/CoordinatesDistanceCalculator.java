@@ -17,7 +17,7 @@ public class CoordinatesDistanceCalculator {
         return totalDistance;
     }
 
-    public int calculateDistanceInKilometersBetweenTwoPoints(Point pointA, Point pointB) {
+    private double calculateDistanceInKilometersBetweenTwoPoints(Point pointA, Point pointB) {
         double latDistance = Math.toRadians(pointA.getLatitude() - pointB.getLatitude());
         double lngDistance = Math.toRadians(pointA.getLongitude() - pointB.getLongitude());
 
@@ -27,6 +27,6 @@ public class CoordinatesDistanceCalculator {
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+        return AVERAGE_RADIUS_OF_EARTH_KM * c;
     }
 }
