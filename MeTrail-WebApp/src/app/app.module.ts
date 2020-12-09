@@ -37,6 +37,10 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ChartsModule } from 'ng2-charts';
+import { DrivingFactorChartComponent } from './components/charts/driving-factor-chart/driving-factor-chart.component';
+import { TraveledDistanceChartComponent } from './components/charts/traveled-distance-chart/traveled-distance-chart.component';
+import { WorkTimeChartComponent } from './components/charts/work-time-chart/work-time-chart.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ConfirmDialogComponent,
     EditEmployeeComponent,
     EditVehicleComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    DrivingFactorChartComponent,
+    TraveledDistanceChartComponent,
+    WorkTimeChartComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +83,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatGridListModule,
     NgxQRCodeModule,
     MatExpansionModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

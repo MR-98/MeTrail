@@ -22,4 +22,8 @@ export class WorkStatsService {
   getStatsForEmployee(employeeId: number, date: string): Observable<EmployeeWorkStats> {
     return this.http.get<EmployeeWorkStats>(this.url + '/getByEmployeeIdAndDate?employeeId=' + employeeId + '&date=' + date, httpOptions);
   }
+
+  getAllStatsInLast30Days() : Observable<EmployeeWorkStats[]> {
+    return this.http.get<EmployeeWorkStats[]>(this.url+"/getWorkStatsInLast30Days");
+  }
 }

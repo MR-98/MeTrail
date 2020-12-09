@@ -1,0 +1,27 @@
+.charts-parent {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.charts-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: space-around;
+}
+
+.chart {
+  width: 48%;
+}
+
+@media screen and (max-width: 1000px) {
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart {
+    width: 100%;
+  }
+}
