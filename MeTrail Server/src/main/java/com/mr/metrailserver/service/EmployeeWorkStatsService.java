@@ -90,4 +90,9 @@ public class EmployeeWorkStatsService {
     public void startWorkStatsEngine() {
         analyzer.analyzeWorkStats();
     }
+
+    public List<EmployeeWorkStats> getAllStatsInLast30Days() {
+        LocalDate initialDate = LocalDate.now().minus(30, ChronoUnit.DAYS);
+        return this.workStatsRepository.findAllByDateGreaterThanEqual(initialDate);
+    }
 }

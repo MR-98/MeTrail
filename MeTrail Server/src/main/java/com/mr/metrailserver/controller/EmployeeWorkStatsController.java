@@ -5,6 +5,8 @@ import com.mr.metrailserver.service.EmployeeWorkStatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/workStats")
 public class EmployeeWorkStatsController {
@@ -27,6 +29,11 @@ public class EmployeeWorkStatsController {
     @GetMapping("/getByEmployeeIdAndDate")
     public EmployeeWorkStats getStatsForEmployeeIdAndDate(@RequestParam(value = "employeeId") Long employeeId, @RequestParam(value = "date") String date) {
         return this.workStatsService.getStatsForEmployeeAndDate(employeeId, date);
+    }
+
+    @GetMapping("/getWorkStatsInLast30Days")
+    public List<EmployeeWorkStats> getAllStatsInLast30Days() {
+        return this.workStatsService.getAllStatsInLast30Days();
     }
 
     @PostMapping("/runEmployeeStatisticsEngine")
