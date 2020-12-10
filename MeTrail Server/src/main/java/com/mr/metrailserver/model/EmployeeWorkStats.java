@@ -18,11 +18,22 @@ public class EmployeeWorkStats {
     private LocalTime endWorkTime;
     private double workTimeInHours;
     private double traveledDistance;
+    private double averageVelocity;
+    private double maxVelocity;
     private Long employeeId;
     private boolean analyzed;
     private Long usedVehicleId;
 
-    public EmployeeWorkStats(LocalDate date, LocalTime startWorkTime, LocalTime endWorkTime, double workTimeInHours, double traveledDistance, Long employeeId, boolean analyzed, Long usedVehicleId) {
+    public EmployeeWorkStats(LocalDate date,
+                             LocalTime startWorkTime,
+                             LocalTime endWorkTime,
+                             double workTimeInHours,
+                             double traveledDistance,
+                             Long employeeId,
+                             boolean analyzed,
+                             Long usedVehicleId,
+                             double averageVelocity,
+                             double maxVelocity) {
         this.date = date;
         this.startWorkTime = startWorkTime;
         this.endWorkTime = endWorkTime;
@@ -31,6 +42,8 @@ public class EmployeeWorkStats {
         this.employeeId = employeeId;
         this.analyzed = analyzed;
         this.usedVehicleId = usedVehicleId;
+        this.averageVelocity = averageVelocity;
+        this.maxVelocity = maxVelocity;
     }
 
     public EmployeeWorkStats() {
@@ -106,5 +119,21 @@ public class EmployeeWorkStats {
 
     public void setUsedVehicleId(Long usedVehicleId) {
         this.usedVehicleId = usedVehicleId;
+    }
+
+    public double getAverageVelocity() {
+        return averageVelocity;
+    }
+
+    public void setAverageVelocity(double averageVelocity) {
+        this.averageVelocity = averageVelocity;
+    }
+
+    public double getMaxVelocity() {
+        return maxVelocity;
+    }
+
+    public void setMaxVelocity(double maxVelocity) {
+        this.maxVelocity = maxVelocity;
     }
 }

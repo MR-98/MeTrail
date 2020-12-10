@@ -50,7 +50,7 @@ public class DailyWorkStatsAnalyzer {
         } else if (score > SCORE_HIGH_THRESHOLD && employee.getDrivingEfficiencyFactor() < MAXIMUM_DRIVING_EFFICIENCY_FACTOR) {
             employee.setDrivingEfficiencyFactor(employee.getDrivingEfficiencyFactor() + DRIVING_EFFICIENCY_FACTOR_MODERATOR);
         }
-        System.out.println(score);
+
         workStat.setAnalyzed(true);
         employeeWorkStatsRepository.save(workStat);
         employeeRepository.save(employee);

@@ -58,15 +58,26 @@ public class EmployeeWorkStatsService {
 
         stats.setEndWorkTime(LocalTime.parse(time));
         stats.setWorkTimeInHours(getTotalWorkTimeInHours(stats));
-        double traveledDistance = calculator.calculateTotalDistanceInKilometers(getEmployeePoints(stats));
+        List<Point> employeePoints = getEmployeePoints(stats);
+
+        double traveledDistance = calculator.calculateTotalDistanceInKilometers(employeePoints);
         stats.setTraveledDistance(traveledDistance);
+        stats.setMaxVelocity(getMaxVelocity(employeePoints));
+        stats.setAverageVelocity(getAverageVelocity(employeePoints));
+
         vehicle.setEstimatedMileage(vehicle.getEstimatedMileage() + traveledDistance);
         vehicle.setCurrentVehicleUser("-----");
+
         employee.setTotalTraveledDistanceInKilometers(employee.getTotalTraveledDistanceInKilometers()+traveledDistance);
+
         this.employeeRepository.save(employee);
         this.vehicleRepository.save(vehicle);
         this.workStatsRepository.save(stats);
         return stats;
+    }
+
+    private double getAverageVelocity(List<Point> employeePoints) {
+        return employeePoints.stream().mapToDouble(Point::getVelocity).average().orElse(Double.NaN);
     }
 
     private double getTotalWorkTimeInHours(EmployeeWorkStats stats) {
@@ -78,9 +89,13 @@ public class EmployeeWorkStatsService {
         List<LocationPoint> employeePoints = this.locationPointRepository.findByEmployeeIdAndDate(stats.getEmployeeId(), stats.getDate());
         List<Point> points = new ArrayList<>();
         employeePoints.forEach(p -> {
-            points.add(new Point(p.getLatitude(), p.getLongitude()));
+            points.add(new Point(p.getLatitude(), p.getLongitude(), p.getSpeed()));
         });
         return points;
+    }
+
+    private double getMaxVelocity(List<Point> points) {
+        return points.stream().mapToDouble(Point::getVelocity).reduce(Double.MIN_VALUE, Double::max);
     }
 
     public EmployeeWorkStats getStatsForEmployeeAndDate(Long employeeId, String date) {
