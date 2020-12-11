@@ -41,6 +41,7 @@ import { ChartsModule } from 'ng2-charts';
 import { DrivingFactorChartComponent } from './components/charts/driving-factor-chart/driving-factor-chart.component';
 import { TraveledDistanceChartComponent } from './components/charts/traveled-distance-chart/traveled-distance-chart.component';
 import { WorkTimeChartComponent } from './components/charts/work-time-chart/work-time-chart.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { WorkTimeChartComponent } from './components/charts/work-time-chart/work
     NgxQRCodeModule,
     MatExpansionModule,
     ChartsModule,
+    MatTabsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

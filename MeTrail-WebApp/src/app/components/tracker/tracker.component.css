@@ -8,6 +8,16 @@
   flex-direction: row;
 }
 
+.forms button {
+  background-color: #31bbe6;
+  color: white;
+  height: 60px;
+}
+
+.forms button:disabled {
+  background-color: #93bbc7;
+}
+
 .forms div {
   margin-right: 10px;
 }
@@ -22,6 +32,25 @@ agm-map {
   margin-left: 10px;
 }
 
+mat-tab-header {
+  justify-content: center;
+}
+
+.pill {
+  width: 20px;
+  height: 5px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.yellow-pill {
+  background-color: #ffeb00;
+}
+
+.green-pill {
+  background-color: #55c363;
+}
+
 @media screen and (max-width: 1100px) {
   .tracker-container {
     width: 100%;
@@ -30,12 +59,16 @@ agm-map {
   }
 
   .tracker-info {
-    width: 50%;
-    margin: 0px auto 10px auto;
+    width: 70%;
+    margin: 10px auto 10px auto;
   }
 
   agm-map {
     order: 1;
+  }
+
+  .forms button {
+    width: 100%;
   }
 }
 

@@ -13,15 +13,17 @@ import { WorkStatsService } from 'src/app/services/work-stats.service';
 })
 export class TrackerComponent implements OnInit {
 
-  points: LocationPoint[] = [];
-  employees: Employee[] = []
+  pointsA: LocationPoint[] = [];
+  pointsB: LocationPoint[] = [];
+  employees: Employee[] = [];
   loaded: boolean = false;
   initialLatitude: number = 51.75000;
   initialLongitude: number = 19.46667;
-  employeeStats: EmployeeWorkStats;
+  employeeStats: EmployeeWorkStats[] = [];
+  statsCounter: number;
 
   chosenDate: string;
-  chosenEmployee: Employee;
+  chosenEmployees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService, private locationService: LocationService, private employeeStatsService: WorkStatsService) {
     this.employeeService.getAllEmployees().subscribe(data => {
@@ -30,52 +32,73 @@ export class TrackerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.locationService.getLocationPointsForEmployeeByDate
   }
 
-  onEmployeeChange(employee: Employee) {
-    this.chosenEmployee = employee;
-
-    if (this.chosenDate) {
-      this.updateMap();
-    }
+  onEmployeeChange(selectedEmployees: Employee[]) {
+    this.chosenEmployees = selectedEmployees;
+    this.loaded = false;
   }
 
   onDateChange(date) {
+    this.loaded = false;
     let year: string = date.getFullYear().toString().padStart(4, "0");
-    let month: string = (date.getMonth()+1).toString().padStart(2, "0");
+    let month: string = (date.getMonth() + 1).toString().padStart(2, "0");
     let day: string = date.getDate().toString().padStart(2, "0");
     this.chosenDate = year + "-" + month + "-" + day;
-
-    if (this.chosenEmployee) {
-      this.updateMap();
-    }
   }
 
-  updateMap() {
+  onSubmit() {
     this.loaded = false;
-    this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployee.id, this.chosenDate).subscribe(points => {
+    this.pointsA = [];
+    this.pointsB = [];
+
+    this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployees[0].id, this.chosenDate).subscribe(points => {
       if (points.length > 0) {
-        this.points = points;
+        this.pointsA = points;
         this.loaded = true;
-        this.updateStats();
       }
+      if(this.chosenEmployees.length> 1) {
+        this.locationService.getLocationPointsForEmployeeByDate(this.chosenEmployees[1].id, this.chosenDate).subscribe(pointsB => {
+          if (pointsB.length > 0) {
+            this.pointsB = pointsB;
+            this.loaded = true;
+          }
+        })
+      }
+      this.updateStats();
     })
   }
 
   updateStats() {
-    this.employeeStatsService.getStatsForEmployee(this.chosenEmployee.id, this.chosenDate).subscribe(data => {
-      this.employeeStats = data;
+    this.statsCounter = this.chosenEmployees.length;
+    this.employeeStats = [];
+    this.employeeStatsService.getStatsForEmployee(this.chosenEmployees[0].id, this.chosenDate).subscribe(first => {
+      this.employeeStats[0] = first;
+      if (this.chosenEmployees.length > 1) {
+        this.employeeStatsService.getStatsForEmployee(this.chosenEmployees[1].id, this.chosenDate).subscribe(second => {
+          this.employeeStats[1] = second;
+        })
+      }
     })
   }
 
-  getIconUrl(index: number) {
-    if (index == 0) {
-      return '../../../assets/pins/pinGreen.png';
-    } else if(index == this.points.length - 1) {
-      return '../../../assets/pins/pinRed.png';
+  getIconUrl(index: number, pointsSet: string) {
+    if (pointsSet === "A") {
+      if (index == 0) {
+        return '../../../assets/pins/pinGreen.png';
+      } else if (index == this.pointsA.length - 1) {
+        return '../../../assets/pins/pinRed.png';
+      } else {
+        return '../../../assets/pins/pinBlue.png';
+      }
     } else {
-      return '../../../assets/pins/pinBlue.png';
+      if (index == 0) {
+        return '../../../assets/pins/pinGreen.png';
+      } else if (index == this.pointsB.length - 1) {
+        return '../../../assets/pins/pinRed.png';
+      } else {
+        return '../../../assets/pins/pinBlue.png';
+      }
     }
   }
 
