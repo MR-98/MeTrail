@@ -8,11 +8,11 @@
     <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <span>Zaloguj się</span>
       <input
-        formControlName="email"
-        type="email"
-        placeholder="{{ placeholder.email }}"
-        name="email"
-        id="email"
+        formControlName="username"
+        type="text"
+        placeholder="{{ placeholder.username }}"
+        name="username"
+        id="username"
         class="input"
       />
       <input
