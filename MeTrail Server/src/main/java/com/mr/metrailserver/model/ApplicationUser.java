@@ -1,8 +1,8 @@
 package com.mr.metrailserver.model;
 
-import com.mr.metrailserver.utils.UserRole;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser {
@@ -12,9 +12,23 @@ public class ApplicationUser {
     private String email;
     private String password;
     private String fullName;
+    private String username;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public ApplicationUser(String username, String email, String password, String fullName) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+    }
+
+    public ApplicationUser() {
+    }
 
     public long getId() {
         return id;
@@ -36,12 +50,12 @@ public class ApplicationUser {
         this.password = password;
     }
 
-    public UserRole getRole() {
-        return role;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFullName() {
@@ -50,5 +64,13 @@ public class ApplicationUser {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -3,6 +3,7 @@ package com.mr.metrailserver.controller;
 import com.mr.metrailserver.model.Employee;
 import com.mr.metrailserver.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public List<Employee> getAll() {
         return employeeService.getAll();
@@ -24,11 +26,13 @@ public class EmployeeController {
         return employeeService.findById(employeeId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public Employee editEmployee(@RequestBody Employee employee) {
         return employeeService.editEmployee(employee);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping
     public void deleteById(@RequestParam(name="employeeId") Long employeeId) {
         employeeService.deleteEmployee(employeeId);
