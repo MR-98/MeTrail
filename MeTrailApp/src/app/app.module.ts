@@ -23,7 +23,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { VehicleService } from './services/vehicle.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
-import {AndroidPermissions} from '@ionic-native/android-permissions/ngx/';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx/';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx/';
     AndroidPermissions,
     BackgroundGeolocation,
     VehicleService,
+    ScreenOrientation,
     BarcodeScanner,
     HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
