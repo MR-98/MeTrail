@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { Storage } from '@ionic/storage';
 export class LoginComponent implements OnInit {
 
   placeholder = {
-    email: 'Email',
+    username: 'Nazwa użytkownika',
     password: 'Hasło'
   };
 
@@ -21,22 +23,24 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   loading: boolean = true;
+  displayError: boolean = false;
 
   constructor(private router: Router,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private employeeService: EmployeeService) {
 
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
       this.router.navigate(['/home']);
     }
 
-    this.storage.get("email").then((email) => {
+    this.storage.get("username").then((username) => {
       this.storage.get("password").then((password) => {
-        if (email != null && password != null) {
-          this.login(email, password);
+        if (username != null && password != null) {
+          this.login(username, password);
         } else {
           this.loading = false;
         }
@@ -46,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
       rememberCheckbox: [false]
     });
@@ -58,25 +62,32 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
+    this.displayError = false;
     if (this.f.rememberCheckbox.value) {
-      this.storage.set("email", this.f.email.value);
+      this.storage.set("username", this.f.username.value);
       this.storage.set("password", this.f.password.value);
     }
 
-    this.login(this.f.email.value, this.f.password.value);
+    this.login(this.f.username.value, this.f.password.value);
   }
 
-  private login(email: string, password: string) {
-    this.authService.login(email, password)
+  private login(username: string, password: string) {
+    this.authService.login(username, password)
       .pipe(first())
       .subscribe(
-        data => {
-          this.loading = false;
-          this.loginForm.reset();
-          this.router.navigate(['/home']);
+        user => {
+          this.employeeService.getEmployeeByEmail(user.email).subscribe(employee=> {
+            user.id = employee.id;
+            this.authService.updateUser(user);
+            this.loading = false;
+            this.loginForm.reset();
+            this.router.navigate(['/home']);
+          })
         },
         error => {
-          console.log(error);
+          this.loading = false;
+          console.log("should display error");
+          this.displayError = true;
         });
   }
 

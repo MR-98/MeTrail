@@ -7,20 +7,23 @@
 	<div class="spinner" *ngIf="loading">
 		<ion-spinner color="secondary"></ion-spinner>
 	</div>
+	<ion-card class="error-card" *ngIf="displayError">
+		Nieprawidłowa nazwa użytkownika lub hasło
+	</ion-card>
 	<ion-card>
 		<h3>Zaloguj się</h3>
 
 		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 			<ion-input
-				id="email"
-				formControlName="email"
-				placeholder="Email"
-				type="email"
+				id="username"
+				formControlName="username"
+				[placeholder]="placeholder.username"
+				type="text"
 			></ion-input>
 			<ion-input
 				id="password"
 				formControlName="password"
-				placeholder="Hasło"
+				[placeholder]="placeholder.password"
 				type="password"
 			></ion-input>
 

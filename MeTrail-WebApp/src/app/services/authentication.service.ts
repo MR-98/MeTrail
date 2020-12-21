@@ -24,11 +24,9 @@ export class AuthenticationService {
   login(username: string, password: string) {
     return this.http.post<any>('https://mytrail-2k20.ew.r.appspot.com/auth/signIn', {username, password})
       .pipe(map(user => {
-        console.log(user);
         // login successful if there's a jwt token in the response
         if (user && user.accessToken) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log("test")
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }

@@ -12,7 +12,7 @@ export class LocationTrackerService {
   constructor(private http: HTTP, private authService: AuthenticationService) { }
 
   sendGPS(latitude: number, longitude: number, speed: number) {
-    let employeeId = this.authService.currentUserValue.userId;
+    let employeeId = this.authService.currentUserValue.id;
     let t = new Date();
 
     let year: string = t.getFullYear().toString().padStart(4, "0");
@@ -36,7 +36,7 @@ export class LocationTrackerService {
         time: hour + ":" + minute + ":" + second,
         date: year + "-" + month + "-" + day,
       }, {
-        Authorization: `Bearer ${currentUser.token}`,
+        Authorization: `Bearer ${currentUser.accessToken}`,
       }
     )
       .then(response => {

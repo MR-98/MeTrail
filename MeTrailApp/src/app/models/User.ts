@@ -1,8 +1,9 @@
-import { UserRole } from './UserRole';
-
 export class User {
-    userId: number;
-    token: string;
-    role: UserRole;
+    id: number;
+    username: string;
+    email: string;
     fullName: string;
-}
+    roles: [];
+    tokenType: string;
+    accessToken: string;
+  }

@@ -21,4 +21,8 @@ export class EmployeeService {
   getEmployeeById(employeeId: number): Observable<Employee> {
     return this.http.get<Employee>(this.url+"?employeeId="+employeeId, httpOptions);
   }
+
+  getEmployeeByEmail(employeeEmail: string): Observable<Employee> {
+    return this.http.get<Employee>(this.url+"/byEmail?employeeEmail="+employeeEmail, httpOptions);
+  }
 }

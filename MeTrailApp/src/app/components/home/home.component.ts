@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.employeeService.getEmployeeById(this.authService.currentUserValue.userId).subscribe(data => {
+    this.employeeService.getEmployeeById(this.authService.currentUserValue.id).subscribe(data => {
       this.drivingFactor = data.drivingEfficiencyFactor;
       this.employeeName = data.fullName;
     })
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
 
   onTrackerStart() {
 
-    this.workStatsService.startWork(this.authService.currentUserValue.userId, this.currentVehicle.id).subscribe(data => {
+    this.workStatsService.startWork(this.authService.currentUserValue.id, this.currentVehicle.id).subscribe(data => {
       console.log(data);
       this.storage.set('workStats', JSON.stringify(data));
     })
@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit {
       desiredAccuracy: 0,
       stationaryRadius: 0,
       distanceFilter: 0,
-      notificationTitle: 'Background tracking',
-      notificationText: 'enabled',
+      notificationTitle: 'MyTrail działa w tle',
+      notificationText: 'Kliknij aby przejść do aplikacji',
       interval: 10000,
       fastestInterval: 5000,
       activitiesInterval: 10000,

@@ -62,7 +62,7 @@ public class EmployeeWorkStatsService {
 
         double traveledDistance = calculator.calculateTotalDistanceInKilometers(employeePoints);
         stats.setTraveledDistance(traveledDistance);
-        stats.setMaxVelocity(getMaxVelocity(employeePoints));
+        stats.setMaxVelocity(Math.round(getMaxVelocity(employeePoints)*100)/100.0);
         stats.setAverageVelocity(getAverageVelocity(employeePoints));
 
         vehicle.setEstimatedMileage(vehicle.getEstimatedMileage() + traveledDistance);

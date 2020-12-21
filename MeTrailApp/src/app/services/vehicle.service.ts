@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Vehicle } from '../models/Vehicle';
 import { AuthenticationService } from './authentication.service';
 import { Storage } from '@ionic/storage';
