@@ -45,4 +45,8 @@ public class EmployeeService {
         this.applicationUserRepository.deleteById(employee.getApplicationUserId());
         employeeRepository.deleteById(employeeId);
     }
+
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
 }

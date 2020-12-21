@@ -26,6 +26,11 @@ public class EmployeeController {
         return employeeService.findById(employeeId);
     }
 
+    @GetMapping("/byEmail")
+    public Employee getByEmail(@RequestParam(name="employeeEmail")String email) {
+        return employeeService.findByEmail(email);
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public Employee editEmployee(@RequestBody Employee employee) {
