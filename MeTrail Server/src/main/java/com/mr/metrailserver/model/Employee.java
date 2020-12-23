@@ -16,6 +16,7 @@ public class Employee {
     private String email;
     private Long applicationUserId;
     private double totalTraveledDistanceInKilometers;
+    private String phoneNumber;
 
     public Employee() {
     }
@@ -66,5 +67,13 @@ public class Employee {
 
     public void setTotalTraveledDistanceInKilometers(double totalTraveledDistanceInKilometers) {
         this.totalTraveledDistanceInKilometers = totalTraveledDistanceInKilometers;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
