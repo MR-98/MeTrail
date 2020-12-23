@@ -8,8 +8,8 @@ public class CoordinatesDistanceCalculator {
     public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
 
 
-    public int calculateTotalDistanceInKilometers(List<Point> points) {
-        int totalDistance = 0;
+    public double calculateTotalDistanceInKilometers(List<Point> points) {
+        double totalDistance = 0.0;
 
         for(int i = 0; i< points.size()-1; i++) {
             totalDistance += calculateDistanceInKilometersBetweenTwoPoints(points.get(i), points.get(i+1));
