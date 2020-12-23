@@ -6,55 +6,78 @@
   </button>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="datasource" matSort>
-
+    <mat-table [dataSource]="datasource" matSort>
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let employee">E/{{ employee.id }}</td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell *matCellDef="let employee" data-label="id"
+          >E/{{ employee.id }}</mat-cell
+        >
       </ng-container>
 
       <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Imię i nazwisko</th>
-        <td mat-cell *matCellDef="let employee">{{ employee.fullName }}</td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Imię i nazwisko</mat-header-cell
+        >
+        <mat-cell *matCellDef="let employee" data-label="imię i nazwisko">{{
+          employee.fullName
+        }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-        <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Email</mat-header-cell
+        >
+        <mat-cell *matCellDef="let employee" data-label="email">{{
+          employee.email
+        }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="drivingEfficiencyFactor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Współczynnik efektywności jazdy</th>
-        <td mat-cell *matCellDef="let employee">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Współczynnik efektywności jazdy</mat-header-cell
+        >
+        <mat-cell
+          *matCellDef="let employee"
+          data-label="współczynnik efektywności jazdy"
+        >
           {{ employee.drivingEfficiencyFactor }}
-        </td>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="totalTraveledDistanceInKilometers">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Przejechany dystans [km]</th>
-        <td mat-cell *matCellDef="let employee">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Przejechany dystans [km]</mat-header-cell
+        >
+        <mat-cell *matCellDef="let employee" data-label="przejechany dystans">
           {{ employee.totalTraveledDistanceInKilometers }}
-        </td>
+        </mat-cell>
       </ng-container>
 
-
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Operacje</th>
-        <td mat-cell *matCellDef="let employee">
+        <mat-header-cell *matHeaderCellDef>Operacje</mat-header-cell>
+        <mat-cell *matCellDef="let employee">
           <div class="action-buttons">
-            <button mat-icon-button class="edit-button" [routerLink]="['/editEmployee', employee.id]">
+            <button
+              mat-icon-button
+              class="edit-button"
+              [routerLink]="['/editEmployee', employee.id]"
+            >
               <i class="material-icons">edit</i>
             </button>
-            <button mat-icon-button color="warn" (click)="openConfirmDialog(employee)">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="openConfirmDialog(employee)"
+            >
               <i class="material-icons">delete</i>
             </button>
           </div>
-        </td>
+        </mat-cell>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
     <mat-paginator
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons

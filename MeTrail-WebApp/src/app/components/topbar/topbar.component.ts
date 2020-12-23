@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class TopbarComponent implements OnInit {
 
-  sidebarOpen = true;
+  sidebarOpen = false;
   currentUser;
 
   constructor(private router: Router, private breakpointObserver: BreakpointObserver, private authService: AuthenticationService) {
@@ -27,7 +27,7 @@ export class TopbarComponent implements OnInit {
         // mobilny widok
         const sidebar = document.getElementById('sidebar');
         if (sidebar != null) {
-          sidebar.style.zIndex = '1';
+          sidebar.style.zIndex = '20';
           this.sidebarHide();
         }
       }
@@ -60,6 +60,7 @@ export class TopbarComponent implements OnInit {
   sidebarShow() {
     const sidebar = document.getElementById('sidebar');
     sidebar.style.marginLeft = '0px';
+    sidebar.style.zIndex = '1000';
     this.sidebarOpen = true;
   }
 

@@ -3,7 +3,7 @@
   color: white;
 }
 
-table {
+mat-table {
   width: 100%;
   margin-top: 20px;
 }
@@ -15,4 +15,10 @@ table {
 
 .edit-button {
   color: #31bbe6;
+}
+
+@media screen and (max-width: 960px) {
+  .action-buttons {
+    float: right;
+  }
 }
