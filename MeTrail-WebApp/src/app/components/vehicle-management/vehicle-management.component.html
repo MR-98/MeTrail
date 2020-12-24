@@ -58,7 +58,7 @@
         <mat-cell
           *matCellDef="let vehicle"
           data-label="estymowany przebieg [km]"
-          >{{ vehicle.estimatedMileage }}</mat-cell
+          >{{ vehicle.estimatedMileage | number: '1.1-2'}}</mat-cell
         >
       </ng-container>
 

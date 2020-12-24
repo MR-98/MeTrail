@@ -19,15 +19,31 @@ export class AddEmployeeComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      username: ['', Validators.required]
     });
   }
 
   get f() { return this.addEmployeeForm.controls; }
 
   onSubmit() {
-    this.employeeService.createAccountForEmployee(this.f.email.value, this.f.firstName.value + ' ' + this.f.lastName.value, this.f.password.value).subscribe(employee => {
-      console.log('DONE');
+    this.employeeService.createAccountForEmployee(this.f.username.value,
+      this.f.email.value,
+      this.f.firstName.value + ' ' + this.f.lastName.value,
+      this.f.password.value).subscribe(val => {
+      this.employeeService.getEmployeeByEmail(this.f.email.value).subscribe(employee => {
+        this.employeeService.editEmployee(employee.id,
+          this.f.firstName.value,
+          this.f.lastName.value,
+          employee.email,
+          employee.drivingEfficiencyFactor,
+          employee.totalTraveledDistanceInKilometers,
+          employee.applicationUserId,
+          this.f.phoneNumber.value).subscribe(e => {
+            console.log("DONE");
+          })
+      })
     })
   }
 

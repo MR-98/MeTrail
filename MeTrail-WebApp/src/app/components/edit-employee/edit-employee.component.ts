@@ -20,13 +20,13 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.employeeId = parseInt(params.get('employeeId'));
-      console.log(this.employeeId);
     });
 
     this.editEmployeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required]
     });
 
     this.employeeService.getEmployeeById(this.employeeId).subscribe(val => {
@@ -35,7 +35,8 @@ export class EditEmployeeComponent implements OnInit {
       this.editEmployeeForm.setValue({
         firstName: name[0],
         lastName: name[1],
-        email: this.employee.email
+        email: this.employee.email,
+        phoneNumber: this.employee.phoneNumber
       })
     })
   }
@@ -49,7 +50,8 @@ export class EditEmployeeComponent implements OnInit {
       this.f.email.value,
       this.employee.drivingEfficiencyFactor,
       this.employee.totalTraveledDistanceInKilometers,
-      this.employee.applicationUserId).subscribe(val => {
+      this.employee.applicationUserId,
+      this.f.phoneNumber.value).subscribe(val => {
       console.log(val);
     })
   }

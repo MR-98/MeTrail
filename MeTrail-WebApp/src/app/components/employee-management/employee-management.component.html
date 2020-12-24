@@ -49,7 +49,16 @@
           >Przejechany dystans [km]</mat-header-cell
         >
         <mat-cell *matCellDef="let employee" data-label="przejechany dystans">
-          {{ employee.totalTraveledDistanceInKilometers }}
+          {{ employee.totalTraveledDistanceInKilometers | number: '1.1-2' }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Numer telefonu</mat-header-cell
+        >
+        <mat-cell *matCellDef="let employee" data-label="numer telefonu">
+          {{ employee.phoneNumber }}
         </mat-cell>
       </ng-container>
 

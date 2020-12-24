@@ -20,12 +20,13 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  createAccountForEmployee(email: string, fullName: string, password: string): Observable<any> {
-    return this.http.post<any>(this.url.replace('employees', 'sign-up'), {
+  createAccountForEmployee(username: string, email: string, fullName: string, password: string): Observable<any> {
+    return this.http.post<any>(this.url.replace('employees', 'auth/signUp'), {
+      username: username,
       email: email,
       password: password,
       fullName: fullName,
-      role: UserRole.EMPLOYEE
+      role: [UserRole.EMPLOYEE]
     }, httpOptions);
   }
 
@@ -37,20 +38,26 @@ export class EmployeeService {
     return this.http.get<Employee>(this.url+"?employeeId="+employeeId, httpOptions);
   }
 
+  getEmployeeByEmail(email: string) :Observable<Employee> {
+    return this.http.get<Employee>(this.url+"/byEmail?employeeEmail="+email, httpOptions);
+  }
+
   editEmployee(employeeId: number,
     firstName: string,
     lastName: string,
     email: string,
     drivingEfficiencyFactor: number,
     totalTraveledDistanceInKilometers: number,
-    applicationUserId: number): Observable<Employee> {
+    applicationUserId: number,
+    phoneNumber: string): Observable<Employee> {
     return this.http.put<Employee>(this.url, {
       id: employeeId,
       fullName: firstName + " " + lastName,
       email: email,
       drivingEfficiencyFactor: drivingEfficiencyFactor,
       totalTraveledDistanceInKilometers: totalTraveledDistanceInKilometers,
-      applicationUserId: applicationUserId
+      applicationUserId: applicationUserId,
+      phoneNumber: phoneNumber
     }, httpOptions);
   }
 

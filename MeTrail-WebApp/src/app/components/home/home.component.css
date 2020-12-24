@@ -8,7 +8,7 @@
 .charts-row {
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   justify-content: space-around;
 }
 

@@ -5,4 +5,5 @@ export class Employee {
   email: string;
   applicationUserId: number;
   totalTraveledDistanceInKilometers: number;
+  phoneNumber: string;
 }
