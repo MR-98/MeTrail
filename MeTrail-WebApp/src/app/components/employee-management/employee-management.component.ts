@@ -41,10 +41,6 @@ export class EmployeeManagementComponent implements OnInit {
     this.router.navigate(['/addEmployee']);
   }
 
-  editEmployee(employee) {
-    console.log(employee);
-  }
-
   deleteEmployee(employee) {
     this.employeeService.deleteEmployeeById(employee.id).subscribe();
     this.employees.splice(this.employees.indexOf(employee), 1);

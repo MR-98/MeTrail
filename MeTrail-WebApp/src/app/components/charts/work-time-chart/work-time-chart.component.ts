@@ -36,12 +36,8 @@ export class WorkTimeChartComponent implements OnInit {
           return newEmployee;
         })
 
-        console.log(newEmployees);
-        console.log(stats);
-
         stats.forEach(s => {
           newEmployees.find(({ id }) => id === s.employeeId).totalWorkHours += s.workTimeInHours;
-          console.log(s.workTimeInHours);
         })
         this.chartData = newEmployees.map(e => e.totalWorkHours);
         this.chartLabels = newEmployees.map(e => e.fullName);

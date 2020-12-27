@@ -25,7 +25,6 @@ export class VehicleDetailsComponent implements OnInit {
     });
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(data => {
       this.vehicle = data;
-      console.log(data);
       this.value = 'VEHICLE-ID-' + this.vehicle.id;
     });
   }

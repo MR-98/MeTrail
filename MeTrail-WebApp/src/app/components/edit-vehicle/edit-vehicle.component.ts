@@ -41,8 +41,6 @@ export class EditVehicleComponent implements OnInit {
         licencePlate: this.vehicle.licencePlate,
         estimatedMileage: this.vehicle.estimatedMileage,
       });
-
-      console.log(this.editVehicleForm);
     })
   }
 

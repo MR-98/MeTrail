@@ -27,7 +27,6 @@ export class VehicleManagementComponent implements OnInit {
   ngOnInit(): void {
     this.vehicleService.getAllVehicles().subscribe(vehicles => {
       this.vehicles = vehicles;
-      console.log(vehicles);
       this.initTable();
     })
   }
