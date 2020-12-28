@@ -1,5 +1,6 @@
 package com.mr.metrailserver.controller;
 
+import com.mr.metrailserver.model.ApplicationUser;
 import com.mr.metrailserver.repository.ApplicationUserRepository;
 import com.mr.metrailserver.security.payload.LoginRequest;
 import com.mr.metrailserver.security.payload.MessageResponse;
@@ -7,6 +8,7 @@ import com.mr.metrailserver.security.payload.SignUpRequest;
 import com.mr.metrailserver.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,5 +48,11 @@ public class AuthController {
         }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping
+    public ApplicationUser editUser(@RequestBody ApplicationUser user) {
+        return this.authService.editUser(user);
     }
 }

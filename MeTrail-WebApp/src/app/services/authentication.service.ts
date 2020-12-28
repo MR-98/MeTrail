@@ -34,6 +34,15 @@ export class AuthenticationService {
       }));
   }
 
+  editUser(userId: number, firstName: string, surname: string, email: string) {
+    return this.http.put<any>('https://mytrail-2k20.ew.r.appspot.com/auth/',
+    {
+      id: userId,
+      fullName: firstName+" "+surname,
+      email: email
+    });
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

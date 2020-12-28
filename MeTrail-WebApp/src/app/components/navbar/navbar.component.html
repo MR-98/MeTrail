@@ -3,10 +3,10 @@
   <div class="account-panel">
 
     <div>
-      <img src="assets/logo/avatar.webp">
+      <img [src]="getAvatar()">
     </div>
     <div>
-      Jan Kowalski
+      {{currentUser.fullName}}
     </div>
 
   </div>

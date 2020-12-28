@@ -19,4 +19,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getAvatar() {
+    let avatarId = localStorage.getItem("avatarId");
+    if(avatarId != undefined) {
+      return "assets/avatars/"+avatarId+".png";
+    } else {
+      return "assets/avatars/avatar1.png";
+    }
+  }
+
 }

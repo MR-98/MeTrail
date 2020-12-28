@@ -108,4 +108,11 @@ public class AuthService {
 
         return applicationUser;
     }
+
+    public ApplicationUser editUser(ApplicationUser user) {
+        ApplicationUser oldUser = this.userRepository.findById(user.getId()).orElseThrow();
+        oldUser.setEmail(user.getEmail());
+        oldUser.setFullName(user.getFullName());
+        return this.userRepository.save(oldUser);
+    }
 }

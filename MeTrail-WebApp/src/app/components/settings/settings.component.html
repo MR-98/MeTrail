@@ -1,0 +1,50 @@
+<div class="content" id="content">
+  <h2>Ustawienia</h2>
+
+  <div class="select-avatar-box">
+    <div class="avatars-row">
+      <img src="assets/avatars/avatar1.png" id="avatar1" (click)="selectAvatar('avatar1')">
+      <img src="assets/avatars/avatar2.png" id="avatar2" (click)="selectAvatar('avatar2')">
+      <img src="assets/avatars/avatar3.png" id="avatar3" (click)="selectAvatar('avatar3')">
+    </div>
+    <div class="avatars-row">
+      <img src="assets/avatars/avatar4.png" id="avatar4" (click)="selectAvatar('avatar4')">
+      <img src="assets/avatars/avatar5.png" id="avatar5" (click)="selectAvatar('avatar5')">
+      <img src="assets/avatars/avatar6.png" id="avatar6" (click)="selectAvatar('avatar6')">
+    </div>
+  </div>
+
+  <form class="settings-form" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <mat-label>Imię</mat-label>
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      class="input"
+      formControlName="firstName"
+    />
+    <mat-label>Nazwisko</mat-label>
+    <input
+      type="text"
+      name="surname"
+      id="surname"
+      class="input"
+      formControlName="surname"
+    />
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      class="input"
+      formControlName="email"
+    />
+
+    <div class="buttons-container">
+      <button mat-raised-button class="save-btn" type="submit">Zapisz</button>
+      <button mat-raised-button class="cancel-btn" (click)="onCancel()">
+        Anuluj
+      </button>
+    </div>
+  </form>
+</div>

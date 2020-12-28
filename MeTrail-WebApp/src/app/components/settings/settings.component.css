@@ -1,0 +1,62 @@
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.input {
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.save-btn {
+  background-color: #31bbe6;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  margin-left: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.select-avatar-box {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatars-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.avatars-row img {
+  width: 28%;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .settings-form {
+    width: 100%;
+  }
+
+  .select-avatar-box {
+    width: 100%;
+  }
+
+  .avatars-row img {
+    width: 22%;
+  }
+}

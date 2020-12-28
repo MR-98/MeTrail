@@ -74,4 +74,8 @@ export class TopbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  navigateToSettings() {
+    this.router.navigate(['/settings']);
+  }
 }

@@ -43,6 +43,7 @@ import { TraveledDistanceChartComponent } from './components/charts/traveled-dis
 import { WorkTimeChartComponent } from './components/charts/work-time-chart/work-time-chart.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { VehicleMileageChartComponent } from './components/charts/vehicle-mileage-chart/vehicle-mileage-chart.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { VehicleMileageChartComponent } from './components/charts/vehicle-mileag
     DrivingFactorChartComponent,
     TraveledDistanceChartComponent,
     WorkTimeChartComponent,
-    VehicleMileageChartComponent
+    VehicleMileageChartComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

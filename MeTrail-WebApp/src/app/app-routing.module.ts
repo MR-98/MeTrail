@@ -7,6 +7,7 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
 import { EmployeeManagementComponent } from './components/employee-management/employee-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { TrackerComponent } from './components/tracker/tracker.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { VehicleManagementComponent } from './components/vehicle-management/vehicle-management.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'editVehicle/:vehicleId', component: EditVehicleComponent, canActivate: [AuthGuard]},
   {path: 'editEmployee/:employeeId', component: EditEmployeeComponent, canActivate: [AuthGuard]},
   {path: 'vehicleDetails/:vehicleId', component: VehicleDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 
