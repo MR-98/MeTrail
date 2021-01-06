@@ -5,7 +5,7 @@
       MyTrail
     </mat-card-title>
 
-    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="loginForm">
       <span>Zaloguj się</span>
       <input
         formControlName="username"
@@ -23,8 +23,8 @@
         id="password"
         class="input"
       />
-      <button mat-raised-button class="sign-in-btn">Zaloguj</button>
-      <button mat-button class="sign-up-btn">Zarejestruj się</button>
+      <button mat-raised-button class="sign-in-btn" (click)="onSubmit()">Zaloguj</button>
+      <button mat-button class="sign-up-btn" (click)="onRegister()">Zarejestruj się</button>
     </form>
   </mat-card>
 </div>

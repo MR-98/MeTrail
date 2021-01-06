@@ -34,6 +34,17 @@ export class AuthenticationService {
       }));
   }
 
+  register(username: string, fullName: string, password: string, email: string) {
+    return this.http.post<any>('https://mytrail-2k20.ew.r.appspot.com/auth/signUp',
+    {
+      username: username,
+      password: password,
+      fullName: fullName,
+      email: email,
+      role: ['admin']
+    })
+  }
+
   editUser(userId: number, firstName: string, surname: string, email: string) {
     return this.http.put<any>('https://mytrail-2k20.ew.r.appspot.com/auth/',
     {

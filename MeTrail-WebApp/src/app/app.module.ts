@@ -44,6 +44,8 @@ import { WorkTimeChartComponent } from './components/charts/work-time-chart/work
 import { MatTabsModule } from '@angular/material/tabs';
 import { VehicleMileageChartComponent } from './components/charts/vehicle-mileage-chart/vehicle-mileage-chart.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { RegisterComponent } from './components/register/register.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     TraveledDistanceChartComponent,
     WorkTimeChartComponent,
     VehicleMileageChartComponent,
-    SettingsComponent
+    SettingsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatExpansionModule,
     ChartsModule,
     MatTabsModule,
+    MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyChhDTNNkVBXx16T5rT-M7DT40kWzTjLLc'
     })

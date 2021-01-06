@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Vehicle } from 'src/app/models/Vehicle';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -15,12 +16,15 @@ export class EditVehicleComponent implements OnInit {
   vehicleId: number;
   vehicle: Vehicle;
 
-  constructor(private formBuilder: FormBuilder, private vehicleService: VehicleService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder,
+    private vehicleService: VehicleService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.vehicleId = parseInt(params.get('vehicleId'));
-      console.log(this.vehicleId);
     });
 
     this.editVehicleForm = this.formBuilder.group({
@@ -33,7 +37,6 @@ export class EditVehicleComponent implements OnInit {
 
     this.vehicleService.getVehicleById(this.vehicleId).subscribe(val => {
       this.vehicle = val;
-      console.log(val);
       this.editVehicleForm.setValue({
         make: this.vehicle.make,
         vehicleModel: this.vehicle.vehicleModel,
@@ -52,8 +55,10 @@ export class EditVehicleComponent implements OnInit {
       this.f.yearOfManufacture.value,
       this.f.licencePlate.value,
       this.f.estimatedMileage.value,
-      null).subscribe(vehicle => {
-      console.log(vehicle);
+      null).subscribe(() => {
+        this.snackBar.open('Pojazd zedytowany', 'Zamknij', {
+          duration: 3000
+        });
     });
   }
 

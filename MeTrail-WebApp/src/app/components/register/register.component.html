@@ -1,0 +1,58 @@
+<div class="register-panel">
+  <mat-card>
+    <mat-card-title>
+      <img src="assets/logo/map-icon.png"/>
+      MyTrail
+    </mat-card-title>
+
+    <div class="error-box" *ngIf="!validForm">
+      {{errorMsg}}
+    </div>
+
+    <form class="form" [formGroup]="registerForm">
+      <span>Zarejestruj się</span>
+
+      <input
+        formControlName="username"
+        type="text"
+        placeholder="{{ placeholder.username }}"
+        name="username"
+        id="username"
+        class="input"
+      />
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="{{ placeholder.email }}"
+        name="email"
+        id="email"
+        class="input"
+      />
+      <input
+        formControlName="fullName"
+        type="text"
+        placeholder="{{ placeholder.fullName }}"
+        name="fullName"
+        id="fullName"
+        class="input"
+      />
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="{{ placeholder.password }}"
+        name="password"
+        id="password"
+        class="input"
+      />
+      <input
+        formControlName="repeatPassword"
+        type="password"
+        placeholder="{{ placeholder.repeatPassword }}"
+        name="repeatPassword"
+        id="repeatPassword"
+        class="input"
+      />
+      <button mat-raised-button class="sign-in-btn" (click)="onSubmit()">Zarejestruj</button>
+    </form>
+  </mat-card>
+</div>

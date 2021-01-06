@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -15,7 +16,11 @@ export class EditEmployeeComponent implements OnInit {
   employeeId: number;
   employee: Employee;
 
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -51,8 +56,10 @@ export class EditEmployeeComponent implements OnInit {
       this.employee.drivingEfficiencyFactor,
       this.employee.totalTraveledDistanceInKilometers,
       this.employee.applicationUserId,
-      this.f.phoneNumber.value).subscribe(val => {
-      console.log(val);
+      this.f.phoneNumber.value).subscribe(() => {
+        this.snackBar.open('Dane pracownika zedytowane', 'Zamknij', {
+          duration: 3000
+        });
     })
   }
 

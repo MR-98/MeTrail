@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
@@ -12,7 +13,10 @@ export class AddVehicleComponent implements OnInit {
 
   addVehicleForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private vehicleService: VehicleService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private vehicleService: VehicleService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.addVehicleForm = this.formBuilder.group({
@@ -33,8 +37,11 @@ export class AddVehicleComponent implements OnInit {
       this.f.licencePlate.value,
       this.f.estimatedMileage.value,
       null)
-      .subscribe(vehicle => {
-      console.log(vehicle);
+      .subscribe(() => {
+        this.addVehicleForm.reset();
+        this.snackBar.open('Pojazd został dodany', 'Zamknij', {
+          duration: 3000
+        });
     })
   }
 

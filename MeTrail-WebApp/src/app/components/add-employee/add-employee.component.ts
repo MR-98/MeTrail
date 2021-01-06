@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -12,7 +13,10 @@ export class AddEmployeeComponent implements OnInit {
 
   addEmployeeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.addEmployeeForm = this.formBuilder.group({
@@ -32,19 +36,22 @@ export class AddEmployeeComponent implements OnInit {
       this.f.email.value,
       this.f.firstName.value + ' ' + this.f.lastName.value,
       this.f.password.value).subscribe(val => {
-      this.employeeService.getEmployeeByEmail(this.f.email.value).subscribe(employee => {
-        this.employeeService.editEmployee(employee.id,
-          this.f.firstName.value,
-          this.f.lastName.value,
-          employee.email,
-          employee.drivingEfficiencyFactor,
-          employee.totalTraveledDistanceInKilometers,
-          employee.applicationUserId,
-          this.f.phoneNumber.value).subscribe(e => {
-            console.log("DONE");
-          })
+        this.employeeService.getEmployeeByEmail(this.f.email.value).subscribe(employee => {
+          this.employeeService.editEmployee(employee.id,
+            this.f.firstName.value,
+            this.f.lastName.value,
+            employee.email,
+            employee.drivingEfficiencyFactor,
+            employee.totalTraveledDistanceInKilometers,
+            employee.applicationUserId,
+            this.f.phoneNumber.value).subscribe(() => {
+              this.addEmployeeForm.reset();
+              this.snackBar.open('Pracownik został dodany', 'Zamknij', {
+                duration: 3000
+              });
+            })
+        })
       })
-    })
   }
 
   onCancel() {
