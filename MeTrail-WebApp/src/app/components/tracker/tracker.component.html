@@ -59,14 +59,14 @@
           <p>Czas: {{ point.time }}</p>
           <p>Dł. geograficzna: {{ point.longitude }}</p>
           <p>Szer. geograficzna: {{ point.latitude }}</p>
-          <p>Prędkość: {{ point.speed }}</p>
+          <p>Prędkość: {{ point.speed | number: '1.1-2'}} km/h</p>
         </agm-info-window>
       </agm-marker>
 
       <agm-polyline
         [visible]="true"
         [strokeWeight]="3"
-        [strokeColor]="'#ffeb00'"
+        [strokeColor]="'#0000ff'"
       >
         <agm-polyline-point
           *ngFor="let point of pointsA"
@@ -89,7 +89,7 @@
           <p>Czas: {{ point.time }}</p>
           <p>Dł. geograficzna: {{ point.longitude }}</p>
           <p>Szer. geograficzna: {{ point.latitude }}</p>
-          <p>Prędkość: {{ point.speed }}</p>
+          <p>Prędkość: {{ point.speed | number: '1.1-2'}} km/h</p>
         </agm-info-window>
       </agm-marker>
 
@@ -116,7 +116,7 @@
         </mat-expansion-panel-header>
         <mat-tab-group mat-align-tabs="center">
           <mat-tab label="{{chosenEmployees[0].fullName}}">
-            <p><b>Kolor linii: <div class="pill yellow-pill"></div></b></p>
+            <p><b>Kolor linii: <div class="pill blue-pill"></div></b></p>
             <p><b>Email pracownika:</b> {{ chosenEmployees[0]?.email }}</p>
             <p><b>Data:</b> {{ chosenDate }}</p>
             <p>

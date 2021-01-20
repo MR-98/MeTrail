@@ -39,8 +39,8 @@ public class VehicleController {
     }
 
     @PostMapping("/setCurrentUser")
-    public Vehicle setCurrentUser(@RequestParam(value = "vehicleId") Long vehicleId, @RequestParam(value = "currentUser") String currentUser) {
-        return this.vehicleService.setCurrentUser(vehicleId, currentUser);
+    public Vehicle setCurrentUser(@RequestParam(value = "vehicleId") Long vehicleId, @RequestParam(value = "employeeId") Long employeeId) {
+        return this.vehicleService.setCurrentUser(vehicleId, employeeId);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

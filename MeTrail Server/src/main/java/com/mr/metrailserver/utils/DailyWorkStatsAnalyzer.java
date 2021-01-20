@@ -38,8 +38,8 @@ public class DailyWorkStatsAnalyzer {
     }
 
     private void analyzeSingleWorkStats(EmployeeWorkStats workStat) {
-        Employee employee = employeeRepository.findById(workStat.getEmployeeId()).orElseThrow();
-        List<LocationPoint> locationPoints = locationPointRepository.findByEmployeeIdAndDate(employee.getID(), workStat.getDate());
+        Employee employee = employeeRepository.findById(workStat.getEmployee().getId()).orElseThrow();
+        List<LocationPoint> locationPoints = locationPointRepository.findByEmployeeIdAndDate(employee.getId(), workStat.getDate());
 
         int score = INITIAL_SCORE;
         score = analyzeVelocityChanges(locationPoints, score);

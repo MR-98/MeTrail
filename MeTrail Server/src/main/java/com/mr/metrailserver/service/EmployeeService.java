@@ -32,7 +32,7 @@ public class EmployeeService {
     }
 
     public Employee editEmployee(Employee employee) {
-        ApplicationUser applicationUser = this.applicationUserRepository.findById(employee.getApplicationUserId()).orElseThrow();
+        ApplicationUser applicationUser = this.applicationUserRepository.findById(employee.getApplicationUser().getId()).orElseThrow();
         applicationUser.setEmail(employee.getEmail());
         applicationUser.setFullName(employee.getFullName());
         this.applicationUserRepository.save(applicationUser);
@@ -42,7 +42,7 @@ public class EmployeeService {
 
     public void deleteEmployee(Long employeeId) {
         Employee employee = this.employeeRepository.findById(employeeId).orElseThrow();
-        this.applicationUserRepository.deleteById(employee.getApplicationUserId());
+        this.applicationUserRepository.deleteById(employee.getApplicationUser().getId());
         employeeRepository.deleteById(employeeId);
     }
 

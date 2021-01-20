@@ -10,15 +10,15 @@
       <mat-grid-tile>{{ vehicle?.yearOfManufacture }}</mat-grid-tile>
       <mat-grid-tile class="title">Numer rejestracyjny:</mat-grid-tile>
       <mat-grid-tile>{{ vehicle?.licencePlate }}</mat-grid-tile>
-      <mat-grid-tile class="title">Estymowany przebieg [km]:</mat-grid-tile>
-      <mat-grid-tile>{{ vehicle?.estimatedMileage }}</mat-grid-tile>
+      <mat-grid-tile class="title">Estymowany przebieg:</mat-grid-tile>
+      <mat-grid-tile>{{ vehicle?.estimatedMileage | number: '1.1-2'}} km</mat-grid-tile>
     </mat-grid-list>
     <div class="qr-container">
       <mat-label>Kod QR pojazdu</mat-label>
       <ngx-qrcode
         *ngIf="value"
-        [elementType]="elementType"
-        [errorCorrectionLevel]="correctionLevel"
+        [elementType]='"url"'
+        [errorCorrectionLevel]='"H"'
         [value]="value"
       ></ngx-qrcode>
     </div>

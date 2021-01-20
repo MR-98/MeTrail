@@ -1,33 +1,34 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    private Long id;
 
     private String make;
     private String vehicleModel;
     private int yearOfManufacture;
     private String licencePlate;
-    private String currentVehicleUser;
+
+    @JoinColumn(name = "current_vehicle_user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Employee currentVehicleUser;
+
     private double estimatedMileage;
 
     public Vehicle() {
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMake() {
@@ -62,11 +63,11 @@ public class Vehicle {
         this.licencePlate = licencePlate;
     }
 
-    public String getCurrentVehicleUser() {
+    public Employee getCurrentVehicleUser() {
         return currentVehicleUser;
     }
 
-    public void setCurrentVehicleUser(String currentVehicleUser) {
+    public void setCurrentVehicleUser(Employee currentVehicleUser) {
         this.currentVehicleUser = currentVehicleUser;
     }
 

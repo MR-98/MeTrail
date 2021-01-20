@@ -102,7 +102,7 @@ public class AuthService {
             employee.setEmail(signUpRequest.getEmail());
             employee.setTotalTraveledDistanceInKilometers(0);
             employee.setDrivingEfficiencyFactor(5);
-            employee.setApplicationUserId(applicationUser.getId());
+            employee.setApplicationUser(applicationUser);
             employeeRepository.save(employee);
         }
 

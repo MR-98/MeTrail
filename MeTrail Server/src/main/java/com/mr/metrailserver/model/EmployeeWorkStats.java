@@ -1,9 +1,6 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -20,31 +17,15 @@ public class EmployeeWorkStats {
     private double traveledDistance;
     private double averageVelocity;
     private double maxVelocity;
-    private Long employeeId;
-    private boolean analyzed;
-    private Long usedVehicleId;
 
-    public EmployeeWorkStats(LocalDate date,
-                             LocalTime startWorkTime,
-                             LocalTime endWorkTime,
-                             double workTimeInHours,
-                             double traveledDistance,
-                             Long employeeId,
-                             boolean analyzed,
-                             Long usedVehicleId,
-                             double averageVelocity,
-                             double maxVelocity) {
-        this.date = date;
-        this.startWorkTime = startWorkTime;
-        this.endWorkTime = endWorkTime;
-        this.workTimeInHours = workTimeInHours;
-        this.traveledDistance = traveledDistance;
-        this.employeeId = employeeId;
-        this.analyzed = analyzed;
-        this.usedVehicleId = usedVehicleId;
-        this.averageVelocity = averageVelocity;
-        this.maxVelocity = maxVelocity;
-    }
+    @JoinColumn(name = "employee_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Employee employee;
+    private boolean analyzed;
+
+    @JoinColumn(name = "vehicle_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Vehicle usedVehicle;
 
     public EmployeeWorkStats() {
     }
@@ -97,12 +78,12 @@ public class EmployeeWorkStats {
         this.traveledDistance = traveledDistance;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public boolean isAnalyzed() {
@@ -113,12 +94,12 @@ public class EmployeeWorkStats {
         this.analyzed = analyzed;
     }
 
-    public Long getUsedVehicleId() {
-        return usedVehicleId;
+    public Vehicle getUsedVehicle() {
+        return usedVehicle;
     }
 
-    public void setUsedVehicleId(Long usedVehicleId) {
-        this.usedVehicleId = usedVehicleId;
+    public void setUsedVehicle(Vehicle usedVehicle) {
+        this.usedVehicle = usedVehicle;
     }
 
     public double getAverageVelocity() {

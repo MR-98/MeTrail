@@ -1,9 +1,6 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,7 +12,10 @@ public class LocationPoint {
     private Long Id;
     private double longitude;
     private double latitude;
-    private Long employeeId;
+
+    @JoinColumn(name = "employee_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Employee employee;
     private LocalDate date;
     private LocalTime time;
     private double speed;
@@ -47,12 +47,12 @@ public class LocationPoint {
         this.latitude = latitude;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public LocalDate getDate() {

@@ -1,32 +1,32 @@
 package com.mr.metrailserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    private Long id;
     private String fullName;
     private double drivingEfficiencyFactor;
     private String email;
-    private Long applicationUserId;
+
+    @JoinColumn(name = "application_user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private ApplicationUser applicationUser;
     private double totalTraveledDistanceInKilometers;
     private String phoneNumber;
 
     public Employee() {
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -53,12 +53,12 @@ public class Employee {
         this.email = email;
     }
 
-    public Long getApplicationUserId() {
-        return applicationUserId;
+    public ApplicationUser getApplicationUser() {
+        return applicationUser;
     }
 
-    public void setApplicationUserId(Long applicationUserId) {
-        this.applicationUserId = applicationUserId;
+    public void setApplicationUser(ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
     }
 
     public double getTotalTraveledDistanceInKilometers() {

@@ -1,6 +1,8 @@
 package com.mr.metrailserver.service;
 
+import com.mr.metrailserver.model.Employee;
 import com.mr.metrailserver.model.Vehicle;
+import com.mr.metrailserver.repository.EmployeeRepository;
 import com.mr.metrailserver.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ public class VehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public Vehicle addVehicle(Vehicle vehicle) {
         return this.vehicleRepository.save(vehicle);
@@ -33,9 +38,10 @@ public class VehicleService {
         return this.vehicleRepository.save(vehicle);
     }
 
-    public Vehicle setCurrentUser(Long vehicleId, String currentUserName) {
+    public Vehicle setCurrentUser(Long vehicleId, Long employeeId) {
         Vehicle vehicle = this.vehicleRepository.findById(vehicleId).orElseThrow();
-        vehicle.setCurrentVehicleUser(currentUserName);
+        Employee employee = this.employeeRepository.findById(employeeId).orElseThrow();
+        vehicle.setCurrentVehicleUser(employee);
         return this.vehicleRepository.save(vehicle);
     }
 }

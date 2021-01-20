@@ -38,14 +38,15 @@ public class EmployeeWorkStatsService {
         EmployeeWorkStats stats = new EmployeeWorkStats();
         stats.setDate(LocalDate.parse(date));
         stats.setStartWorkTime(LocalTime.parse(time));
-        stats.setEmployeeId(employeeId);
+        Employee employee = this.employeeRepository.findById(employeeId).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).orElseThrow();
+        stats.setEmployee(employee);
         stats.setAnalyzed(false);
-        stats.setUsedVehicleId(vehicleId);
+        stats.setUsedVehicle(vehicle);
         this.workStatsRepository.save(stats);
 
-        Vehicle vehicle = vehicleRepository.findById(vehicleId).orElseThrow();
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow();
-        vehicle.setCurrentVehicleUser(employee.getFullName());
+
+        vehicle.setCurrentVehicleUser(employee);
         this.vehicleRepository.save(vehicle);
         return stats;
     }
@@ -53,8 +54,8 @@ public class EmployeeWorkStatsService {
     public EmployeeWorkStats stopWorking(Long workStatsId, String time) {
         EmployeeWorkStats stats = this.workStatsRepository.findById(workStatsId).orElseThrow();
         CoordinatesDistanceCalculator calculator = new CoordinatesDistanceCalculator();
-        Vehicle vehicle = vehicleRepository.findById(stats.getUsedVehicleId()).orElseThrow();
-        Employee employee = employeeRepository.findById(stats.getEmployeeId()).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(stats.getUsedVehicle().getId()).orElseThrow();
+        Employee employee = employeeRepository.findById(stats.getEmployee().getId()).orElseThrow();
 
         stats.setEndWorkTime(LocalTime.parse(time));
         stats.setWorkTimeInHours(getTotalWorkTimeInHours(stats));
@@ -66,7 +67,7 @@ public class EmployeeWorkStatsService {
         stats.setAverageVelocity(getAverageVelocity(employeePoints));
 
         vehicle.setEstimatedMileage(vehicle.getEstimatedMileage() + traveledDistance);
-        vehicle.setCurrentVehicleUser("-----");
+        vehicle.setCurrentVehicleUser(null);
 
         employee.setTotalTraveledDistanceInKilometers(employee.getTotalTraveledDistanceInKilometers()+traveledDistance);
 
@@ -86,7 +87,7 @@ public class EmployeeWorkStatsService {
     }
 
     private List<Point> getEmployeePoints(EmployeeWorkStats stats) {
-        List<LocationPoint> employeePoints = this.locationPointRepository.findByEmployeeIdAndDate(stats.getEmployeeId(), stats.getDate());
+        List<LocationPoint> employeePoints = this.locationPointRepository.findByEmployeeIdAndDate(stats.getEmployee().getId(), stats.getDate());
         List<Point> points = new ArrayList<>();
         employeePoints.forEach(p -> {
             points.add(new Point(p.getLatitude(), p.getLongitude(), p.getSpeed()));

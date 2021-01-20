@@ -89,7 +89,7 @@ export class TrackerComponent implements OnInit {
       } else if (index == this.pointsA.length - 1) {
         return '../../../assets/pins/pinRed.png';
       } else {
-        return '../../../assets/pins/pinBlue.png';
+        return 'none';
       }
     } else {
       if (index == 0) {
@@ -97,7 +97,7 @@ export class TrackerComponent implements OnInit {
       } else if (index == this.pointsB.length - 1) {
         return '../../../assets/pins/pinRed.png';
       } else {
-        return '../../../assets/pins/pinBlue.png';
+        return 'none';
       }
     }
   }
